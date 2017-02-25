@@ -19,7 +19,8 @@
     "nouislider": "^9.2.0",
     "rangeslider.js": "^2.3.0",
     "vue": "^2.1.10",
-    "vue-router": "^2.2.0"
+    "vue-router": "^2.2.0",
+    "vue-slider-component": "^2.1.4"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
