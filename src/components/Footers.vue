@@ -7,8 +7,10 @@
     </div>
     <div class="progress">
       <span>0:00</span>
-      <vue-slider ref="slider" v-bind="setting" style="display:inline-block;padding:15px 10px;" v-model="value"></vue-slider>
+      <vue-slider class="playprogress" ref="slider" v-bind="setting" style="display:inline-block;padding:15px 10px;" v-model="progress"></vue-slider>
       <span>4:50</span>
+      <img class="volume" src="../assets/volume.png">
+      <vue-slider class="volumeprogress" ref="slider2" v-bind="setting2" style="display:inline-block;padding:15px 10px;" v-model="volume"></vue-slider>
     </div>
 	</div>
 </template>
@@ -24,14 +26,23 @@ export default {
     return {
       app: '网易云音乐',
       setting: {
-        width: 500,
+        width: 430,
         tooltip: false,
+        dotSize: 13,
         processStyle: {
           'background-color': 'rgb(232,60,60)'
-        },
-        sliderStyle: null
+        }
       },
-      value: 1
+      progress: 1,
+      setting2: {
+        width: 100,
+        tooltip: false,
+        dotSize: 10,
+        processStyle: {
+          'background-color': 'rgb(232,60,60)'
+        }
+      },
+      volume: 2
     }
   }
 }
@@ -83,15 +94,31 @@ export default {
   top: -10px;
 }
 
+.volume{
+  width: 20px;
+  height: 20px;
+  opacity: 0.5;
+  position: relative;
+  top:-8px;
+  left: 5px;
+}
 
 </style>
 <style>
-.star-slider,.vue-slider,.vue-slider-dot{
+ .vue-slider-dot{
   background: url('../assets/point.png') no-repeat;
-  background-size: 10px 10px;
   box-shadow: none;
   border-radius: 0;
   position: relative;
+}
+
+.playprogress .vue-slider-dot{
+  background-size: 5px 5px;
+  background-position: 4px;
+}
+
+.volumeprogress .vue-slider-dot{
+  background-size: 4px 4px;
   background-position: 3px;
 }
 
