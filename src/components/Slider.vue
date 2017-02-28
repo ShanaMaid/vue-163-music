@@ -1,10 +1,10 @@
 <template>
     <ul class="slider" :style="styleObject">
             <li  v-for="(item,index) in imgSrc" :class="[move[index]]">
-                <img :src="item" :style="imgStyle" >
+                <img :src="item" :style="imgStyle"   @click="target(index)">
             </li>
             <li  class="button">
-                <em  v-for="(item,index) in imgSrc" @click="target(index)" ></em>
+                <em  v-for="(item,index) in imgSrc" @click="target(index)" :class="[move[index]]"></em>
             </li>
             <li class="control">
                 <em @click="prePic"></em>
@@ -34,9 +34,6 @@ export default{
   data () {
     return {
       imgStyle: {},
-      leftStyle: {},
-      centerStyle: {},
-      rightStyle: {},
       move: ['left', 'center', 'right']
     }
   },
@@ -96,26 +93,26 @@ li{
     transition:transform 0.5s,scale 1s,left 1s,right 1s;
 }
 
-.left,
-.right{
+li.left,
+li.right{
     transform: scale(0.9,0.9);
     z-index: 10;
 }
 
-.left{
+li.left{
     left: -3%;
 }
 
-.center{
+li.center{
     left: 15%;
     z-index: 100;
 }
 
-.right{
+li.right{
     left: 33%;
 }
 
-.wait{
+li.wait{
     transform: scale(0,0);
 }
 
@@ -132,6 +129,7 @@ li{
     height: 30px;
     top: calc(50% - 20px);
     display: none;
+    left: 0;
 }
 
 .slider:hover .control{
@@ -142,10 +140,14 @@ li{
     display: inline-block;
     width: 20px;
     height: 5px;
-    background-color: rgb(198,47,47);
+    background-color: rgb(225,225,226);
     border-radius: 10px;
     margin: 0 2px;
     cursor: pointer;
+}
+
+em.center{
+  background-color: rgb(198,47,47);
 }
 
 </style>
