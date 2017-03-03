@@ -50,7 +50,7 @@
 </template>
 <script >
 import Cover from './Cover'
-import Slider from './Slider'
+import Slider from 'vue-image-scroll'
 export default {
   name: 'mains',
   components: {
@@ -65,7 +65,37 @@ export default {
           width: '750',
           height: '250'
         },
-        imgSrc: ['static/img/1-1.jpg', 'static/img/1-2.jpg', 'static/img/1-3.jpg', 'static/img/1-4.jpg', 'static/img/1-5.jpg'],
+        image: [
+          {
+            src: 'static/img/1-1.jpg',
+            tagName: '活动',
+            tagStyle: {
+              backgroundColor: 'blue'
+            }
+          },
+          {
+            src: 'static/img/1-2.jpg',
+            tagName: '专栏'
+          },
+          {
+            src: 'static/img/1-3.jpg',
+            tagName: '活动',
+            tagStyle: {
+              backgroundColor: 'blue'
+            }
+          },
+          {
+            src: 'static/img/1-4.jpg',
+            tagName: '专栏'
+          },
+          {
+            src: 'static/img/1-5.jpg',
+            tagName: '活动',
+            tagStyle: {
+              backgroundColor: 'blue'
+            }
+          }
+        ],
         interval: 4000
       }
     }
