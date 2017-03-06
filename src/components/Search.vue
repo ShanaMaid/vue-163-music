@@ -21,7 +21,6 @@
 </template>
 <script>
 export default{
-  name: 'Search',
   data () {
     return {
       app: '网易云音乐',

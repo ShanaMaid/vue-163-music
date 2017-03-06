@@ -1,17 +1,15 @@
 <template>
 	<div id="contents" name="contents">
-		<List></List>
-		<Mains></Mains>
+		<list></list>
+		<router-view/>
 	</div>
 </template>
 <script >
-import List from './List'
-import Mains from './Mains'
+import List from './list'
 export default {
   name: 'contents',
   components: {
-    List,
-    Mains
+    List
   },
   data () {
     return {

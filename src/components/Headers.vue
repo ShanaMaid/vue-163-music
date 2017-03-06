@@ -11,10 +11,10 @@
 				</div>
 			</dd>
 			<dd>
-				<Search></Search>
+				<search></search>
 			</dd>
 			<dd class="person">
-				<PersonMsg></PersonMsg>
+				<person-msg></person-msg>
 			</dd>
 			<dd></dd>
 			<dd></dd>
@@ -23,8 +23,8 @@
 	</div>
 </template>
 <script >
-import Search from './Search'
-import PersonMsg from './PersonMsg'
+import Search from './search'
+import PersonMsg from './person-msg'
 export default {
   name: 'headers',
   components: {

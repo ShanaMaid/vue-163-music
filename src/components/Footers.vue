@@ -15,12 +15,12 @@
 	</div>
 </template>
 <script >
-import vueSlider from 'vue-slider-component'
+import VueSlider from 'vue-slider-component'
 
 export default {
   name: 'footers',
   components: {
-    vueSlider
+    VueSlider
   },
   data () {
     return {

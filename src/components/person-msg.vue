@@ -53,7 +53,6 @@
 </template>
 <script >
 export default{
-  name: 'perosonmsg',
   data () {
     return {
       app: '网易云音乐',
