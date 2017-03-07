@@ -2,13 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import NotFound from 'components/not-found'
 
-import Recommend from 'components/find/recommend'
-import Song from 'components/find/song'
-import Nav from 'components/find/nav'
-import Station from 'components/find/station'
-import Rank from 'components/find/rank'
-import New from 'components/find/new'
-import Singer from 'components/find/Singer'
+import find from 'components/find/index.js'
 
 Vue.use(Router)
 
@@ -17,38 +11,38 @@ export default new Router({
     {
       path: '/home',
       name: 'home',
-      component: Nav,
-      redirect: '/',
+      component: find.Nav,
+      redirect: '/home/recommend',
       children: [
         {
           path: 'recommend',
           name: 'recommend',
-          component: Recommend
+          component: find.Recommend
         },
         {
           path: 'song',
           name: 'song',
-          component: Song
+          component: find.Song
         },
         {
           path: 'station',
           name: 'station',
-          component: Station
+          component: find.Station
         },
         {
           path: 'singer',
           name: 'singer',
-          component: Singer
+          component: find.Singer
         },
         {
           path: 'new',
           name: 'new',
-          component: New
+          component: find.New
         },
         {
           path: 'rank',
           name: 'rank',
-          component: Rank
+          component: find.Rank
         }
       ]
     },

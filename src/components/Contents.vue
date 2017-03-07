@@ -13,7 +13,15 @@ export default {
   },
   data () {
     return {
-      app: '网易云音乐'
+      app: ''
+    }
+  },
+  computed: {
+    topName: function () {
+      let path = this.$route.path
+      path = path.substr(1)
+      path = path.substr(0, path.indexOf('/'))
+      return path
     }
   }
 }
