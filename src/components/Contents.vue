@@ -1,6 +1,6 @@
 <template>
 	<div id="contents" name="contents">
-		<list></list>
+		<list :choosed="topName"></list>
 		<router-view/>
 	</div>
 </template>

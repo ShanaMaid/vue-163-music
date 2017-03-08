@@ -2,16 +2,16 @@
 	<div id="list" name="list">
 		<dl>
       <dt><span>推荐</span></dt>
-      <dd class="choosed"><span><img class="icon" src="../assets/music.png"> 发现音乐</span></dd>  
-      <dd><span><img class="icon" src="../assets/fm.png">私人FM</span></dd>  
-      <dd><span><img class="icon" src="../assets/mv.png">MV</span></dd>  
-      <dd><span><img class="icon" src="../assets/friend.png">朋友</span></dd>  
+      <router-link to="/find/recommend"><dd :class="{choosed: choosed == 'find'}"><span><img class="icon" src="../assets/music.png"> 发现音乐</span></dd></router-link>  
+      <router-link to="/personal/"><dd to-link :class="{choosed: choosed == 'personal'}"><span><img class="icon" src="../assets/fm.png">私人FM</span></dd></router-link>  
+      <router-link to="/mv/"><dd :class="{choosed: choosed == 'mv'}"><span><img class="icon" src="../assets/mv.png">MV</span></dd></router-link>  
+      <router-link to="/friend/"><dd :class="{choosed: choosed == 'friend'}"><span><img class="icon" src="../assets/friend.png">朋友</span></dd></router-link>  
       <dt><span>我的音乐</span></dt>
-      <dd><span><img class="icon" src="../assets/local_music.png">本地音乐</span></dd>  
-      <dd><span><img class="icon" src="../assets/download.png">下载管理</span></dd>  
-      <dd><span><img class="icon" src="../assets/cloud.png">我的音乐云盘</span></dd>  
-      <dd><span><img class="icon" src="../assets/singer.png">我的歌手</span></dd>  
-      <dd><span><img class="icon" src="../assets/station.png">我的电台</span></dd>
+      <router-link to="/local/"><dd :class="{choosed: choosed == 'local'}"><span><img class="icon" src="../assets/local_music.png">本地音乐</span></dd></router-link>  
+      <router-link to="/download/"><dd :class="{choosed: choosed == 'download'}"><span><img class="icon" src="../assets/download.png">下载管理</span></dd></router-link>  
+      <router-link to="/cloud/"><dd :class="{choosed: choosed == 'cloud'}"><span><img class="icon" src="../assets/cloud.png">我的音乐云盘</span></dd></router-link>  
+      <router-link to="/singer/"><dd :class="{choosed: choosed == 'singer'}"><span><img class="icon" src="../assets/singer.png">我的歌手</span></dd></router-link>  
+      <router-link to="/station/"><dd :class="{choosed: choosed == 'station'}"><span><img class="icon" src="../assets/station.png">我的电台</span></dd></router-link>
       <dt><span>创建的歌单</span></dt>
       <dd><span><img class="icon" src="../assets/heart.png">我喜欢的音乐</span></dd>  
       <dd><span><img class="icon" src="../assets/list.png">light</span></dd>  
@@ -32,6 +32,7 @@
 <script >
 export default {
   name: 'list',
+  props: ['choosed'],
   data () {
     return {
       app: '网易云音乐'
@@ -50,15 +51,17 @@ export default {
 
 dt,dd{
   height: 30px;
-  font-size: 15px;
   line-height: 30px;
   font-family: microsoft yahei;
   position: relative;
+  font-size: 14px;
 }
 
 dd{
   text-indent: 20px;
-  opacity: 0.5;
+  font-size: 13px;
+  opacity: 0.8;
+  color: black;
 }
 
 dd:hover{
@@ -82,6 +85,7 @@ dt{
 .choosed{
   background-color: rgb(230,231,234);
   opacity: 1.0;
+  color: black;
 }
 
 .choosed:before{

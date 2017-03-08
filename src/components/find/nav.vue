@@ -2,12 +2,12 @@
   <div id="mains">
     <div class="navigation">
       <dl>
-        <router-link to="/home/recommend"><dd :class="{choosed:$route.name=='recommend'}">个性推荐</dd></router-link>
-        <router-link to="/home/song"><dd :class="{choosed:$route.name=='song'}">歌单</dd></router-link>
-        <router-link to="/home/station"><dd :class="{choosed:$route.name=='station'}">主播电台</dd></router-link>
-        <router-link to="/home/rank"><dd :class="{choosed:$route.name=='rank'}">排行榜</dd></router-link>
-        <router-link to="/home/singer"><dd :class="{choosed:$route.name=='singer'}">歌手</dd></router-link>
-        <router-link to="/home/new"><dd :class="{choosed:$route.name=='new'}">最新音乐</dd></router-link>
+        <router-link to="/home/recommend"><dd :class="{choosed: $route.name =='recommend'}">个性推荐</dd></router-link>
+        <router-link to="/home/song"><dd :class="{choosed: $route.name =='song'}">歌单</dd></router-link>
+        <router-link to="/home/station"><dd :class="{choosed: $route.name =='station'}">主播电台</dd></router-link>
+        <router-link to="/home/rank"><dd :class="{choosed: $route.name =='rank'}">排行榜</dd></router-link>
+        <router-link to="/home/singer"><dd :class="{choosed: $route.name =='singer'}">歌手</dd></router-link>
+        <router-link to="/home/new"><dd :class="{choosed: $route.name =='new'}">最新音乐</dd></router-link>
      </dl>
     </div>
     <router-view/>
@@ -67,7 +67,6 @@ dd.choosed{
 a{
   text-decoration: none;
   outline: none;
-  color: 
 }
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/

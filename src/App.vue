@@ -30,4 +30,11 @@ export default {
   padding: 0;
   box-shadow: 0px 0px 10px 7px rgb(225,225,226);
 }
+
+a,a:hover,a:visited,a:link{
+  text-decoration: none;
+  outline: none;
+}
+
+
 </style>
