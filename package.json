@@ -20,8 +20,10 @@
     "rangeslider.js": "^2.3.0",
     "vue": "^2.1.10",
     "vue-image-scroll": "^1.0.2",
+    "vue-resource": "^1.2.1",
     "vue-router": "^2.2.0",
-    "vue-slider-component": "^2.1.4"
+    "vue-slider-component": "^2.1.4",
+    "vuex": "^2.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

@@ -1,6 +1,6 @@
 <template>
 	<div class="search">
-		<span><input type="text"  @focus="display" @blur="display"  placeholder="搜索音乐，歌手，歌词，用户"></span>
+		<span><input type="text" v-model="s" @keyup.enter = "search"  @focus="display" @blur="display"  placeholder="搜索音乐，歌手，歌词，用户"></span>
 		<div v-show="show" name="downlist" id="downlist">
     		<em></em>
     		<dl class="content">
@@ -24,12 +24,27 @@ export default{
   data () {
     return {
       app: '网易云音乐',
-      show: false
+      show: false,
+      s: ''
     }
   },
   methods: {
     display: function () {
       this.show = !this.show
+    },
+    search: function () {
+      if (new Set(...this.s).has(' ') || this.s === '') {
+        alert('别调皮啦！输入正确歌名')
+        return
+      }
+      this.$store.commit('setSearchName', this.s)
+      this.$http.post('/api/search/pc', {s: this.s, limit: 10, type: 1}).then(response => {
+        console.log(response.body)
+        // this.$store.commit('setSearchResult', response.body.result)
+        this.$router.push({path: '/search'})
+      }, response => {
+        alert('网络存在问题，无法搜索')
+      })
     }
   }
 }
@@ -84,7 +99,7 @@ em{
 }
 
 .content{
-	height: 340px;
+	height: 400px;
 	width: 100%;
 	background-color: white;
 	box-shadow: 0px 2px 4px rgb(225,225,226);

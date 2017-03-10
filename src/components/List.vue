@@ -43,9 +43,7 @@ export default {
 <style scoped>
 #list{
 	height: 100%;
-	width: 20%;
   background-color: rgb(245,245,247);
-  float: left;
   overflow-y: scroll;
 }
 

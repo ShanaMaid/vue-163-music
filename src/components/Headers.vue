@@ -74,7 +74,7 @@ dl dd:first-child{
 .control div{
 	border: rgb(168,40,40) 2px solid;
 	border-radius: 2px;
-	width: 50px;
+	width: 52px;
 	margin: 0 auto;
 }
 

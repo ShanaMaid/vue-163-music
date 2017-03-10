@@ -93,9 +93,6 @@ export default {
   box-sizing: border-box;
 }
 
-
-
-
 .slider{
   margin-top: 20px;
 }

@@ -1,7 +1,11 @@
 <template>
 	<div id="contents" name="contents">
-		<list :choosed="topName"></list>
-		<router-view/>
+    <div class="left">
+      <list :choosed="topName"></list>
+    </div>
+		<div class="right">
+      <router-view />
+    </div>
 	</div>
 </template>
 <script >
@@ -30,5 +34,17 @@ export default {
 #contents{
 	height: 570px;
 	width: 100%;
+}
+
+.left{
+  width: 20%;
+  height: 100%;
+  float: left;
+}
+
+.right{
+  width: 80%;
+  height: 100%;
+  float: right;
 }
 </style>

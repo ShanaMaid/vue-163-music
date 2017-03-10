@@ -3,13 +3,17 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import http from 'vue-resource'
+import store from './store'
 import 'animate.css/animate.min.css'
-import 'normalize.css'
 
+Vue.use(http)
+Vue.http.options.emulateJSON = true
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

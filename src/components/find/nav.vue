@@ -2,12 +2,12 @@
   <div id="mains">
     <div class="navigation">
       <dl>
-        <router-link to="/home/recommend"><dd :class="{choosed: $route.name =='recommend'}">个性推荐</dd></router-link>
-        <router-link to="/home/song"><dd :class="{choosed: $route.name =='song'}">歌单</dd></router-link>
-        <router-link to="/home/station"><dd :class="{choosed: $route.name =='station'}">主播电台</dd></router-link>
-        <router-link to="/home/rank"><dd :class="{choosed: $route.name =='rank'}">排行榜</dd></router-link>
-        <router-link to="/home/singer"><dd :class="{choosed: $route.name =='singer'}">歌手</dd></router-link>
-        <router-link to="/home/new"><dd :class="{choosed: $route.name =='new'}">最新音乐</dd></router-link>
+        <router-link to="/find/recommend"><dd :class="{choosed: topName =='recommend'}">个性推荐</dd></router-link>
+        <router-link to="/find/song"><dd :class="{choosed: topName =='song'}">歌单</dd></router-link>
+        <router-link to="/find/station"><dd :class="{choosed: topName =='station'}">主播电台</dd></router-link>
+        <router-link to="/find/rank"><dd :class="{choosed: topName =='rank'}">排行榜</dd></router-link>
+        <router-link to="/find/singer"><dd :class="{choosed: topName =='singer'}">歌手</dd></router-link>
+        <router-link to="/find/new"><dd :class="{choosed: topName =='new'}">最新音乐</dd></router-link>
      </dl>
     </div>
     <router-view/>
@@ -15,7 +15,15 @@
 </template>
 <script>
 export default{
-  name: 'navigation'
+  name: 'navigation',
+  computed: {
+    topName: function () {
+      let path = this.$route.path
+      path = path.substr(path.lastIndexOf('/') + 1)
+      console.log(path)
+      return path
+    }
+  }
 }
 </script>
 <style scoped>
@@ -25,8 +33,6 @@ export default{
 
 #mains{
   height: 100%;
-  width: 80%;
-  float: right;
   padding: 0 20px;
   overflow-y: scroll;
 }
