@@ -5,13 +5,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    songList: ['http://m2.music.126.net/GNFQZzUHG4FDmsr_d7sV8A==/2022001883480951.mp3'],
+    songList: [],
     searchName: '',
     searchResult: {}
   },
   mutations: {
     addSong (state, url) {
-      state.songList.unshift()
+      state.songList.unshift(url)
+      console.log('111')
     },
     setSearchName (state, name) {
       state.searchName = name

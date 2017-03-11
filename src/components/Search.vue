@@ -33,14 +33,38 @@ export default{
       this.show = !this.show
     },
     search: function () {
+      console.log(this.show)
       if (new Set(...this.s).has(' ') || this.s === '') {
         alert('别调皮啦！输入正确歌名')
+        this.display()
         return
       }
       this.$store.commit('setSearchName', this.s)
-      this.$http.post('/api/search/pc', {s: this.s, limit: 10, type: 1}).then(response => {
+      this.$http.post('/api/search/pc', {s: this.s, limit: 100, type: 1}).then(response => {
         console.log(response.body)
-        // this.$store.commit('setSearchResult', response.body.result)
+        let list = []
+        let result = {songCount: response.body.result.songCount}
+        if (response.body.result.songCount > 0) {
+          for (let item of response.body.result.songs) {
+            let singer = ''
+            let {
+              name,
+              mp3Url,
+              duration,
+              album: {
+                name: albumName
+              }
+            } = item
+            for (let item of item.artists) {
+              singer += item.name + ' '
+            }
+            list.push({name, mp3Url, duration, albumName, singer})
+          }
+          result = {list, songCount: response.body.result.songCount}
+        }
+        console.log(result)
+        console.log(response.body)
+        this.$store.commit('setSearchResult', result)
         this.$router.push({path: '/search'})
       }, response => {
         alert('网络存在问题，无法搜索')

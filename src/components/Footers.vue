@@ -8,12 +8,17 @@
     </div>
     <div class="progress">
       <span>{{current}}</span>
-      <vue-slider @drag-start="dragStart" @drag-end="dragEnd" class="playprogress" ref="slider" v-bind="setting" style="display:inline-block;padding:15px 10px;" v-model="progress"></vue-slider>
+      <vue-slider class="playprogress" ref="slider" v-bind="setting" style="display:inline-block;padding:15px 10px;" v-model="progress"></vue-slider>
       <span>{{end}}</span>
       <img class="volume" src="../assets/volume.png">
       <vue-slider class="volumeprogress" ref="slider2" v-bind="setting2" style="display:inline-block;padding:15px 10px;" v-model="volume"></vue-slider>
 
-      <audio @canplay="audioInit" ref="player" @ended="pauseMusic" style="display:none" :src="this.$store.state.songList[0]"  controls="controls"></audio>
+      <audio 
+        @canplay="audioInit" ref="player" 
+        @ended="ended" 
+        @error="errorLoad"
+        @timeupdate = "setCurrent"
+        style="display:none" :src="mp3Url"  controls="controls"></audio>
     </div>
 	</div>
 </template>
@@ -40,7 +45,7 @@ export default {
         clickable: true,
         speed: 1.0
       },
-      progress: 1,
+      progress: 0,
       setting2: {
         width: 100,
         tooltip: 'hover',
@@ -67,6 +72,7 @@ export default {
       const duration = this.$refs.player.duration
       this.end = this.timeToStr(duration)
       this.setting.max = Number.parseInt(duration, 10)
+      this.playMusic()
     },
     getCurrent: function () {
       const currentTime = this.$refs.player.currentTime
@@ -74,22 +80,22 @@ export default {
       this.progress = Number.parseInt(currentTime, 10)
     },
     playMusic: function () {
+      if (!this.mp3Url) {
+        return
+      }
       this.update = setInterval(this.getCurrent, 1000 / 60)
       this.$refs.player.play()
-      this.play = !this.play
+      this.play = true
     },
     pauseMusic: function () {
       clearInterval(this.update)
       this.$refs.player.pause()
-      this.play = !this.play
+      this.play = false
     },
-    dragEnd: function () {
-      this.drag = false
-      this.update = setInterval(this.getCurrent, 1000 / 60)
-    },
-    dragStart: function () {
-      this.drag = true
+    ended: function () {
       clearInterval(this.update)
+      this.play = false
+      this.progress = 0
     },
     timeToStr: function (time) {
       let min = Number.parseInt(time / 60, 10) + ''
@@ -97,17 +103,33 @@ export default {
       min = min.length === 1 ? ('0' + min) : min
       seconds = seconds.length === 1 ? ('0' + seconds) : seconds
       return min + ':' + seconds
+    },
+    errorLoad: function () {
+      alert('该歌曲网易云具有版权，无法播放')
+      this.play = false
+    },
+    setCurrent: function () {
+      // this.current = this.timeToStr(newValue)
+      // this.$refs.player.currentTime = this.current
+    }
+  },
+  computed: {
+    mp3Url: function () {
+      return this.$store.state.songList[0]
     }
   },
   watch: {
     progress: function (newValue, oldValue) {
-      if (this.drag || Math.abs(newValue - oldValue) > 1) {
+      if (Math.abs(newValue - oldValue) > 1) {
         this.current = this.timeToStr(newValue)
         this.$refs.player.currentTime = newValue
       }
     },
     volume: function (newValue) {
       this.$refs.player.volume = newValue / 100
+    },
+    mp3Url: function () {
+      this.playMusic()
     }
   }
 }

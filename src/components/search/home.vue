@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="search">
       <h1>搜索<span class="searchname">"{{this.$store.state.searchName}}"</span>，找到{{this.$store.state.searchResult.songCount}}首单曲</h1>
       <dl>
           <router-link to="/search/single"><dd :class="{choosed: topName =='single'}">单曲</dd></router-link>
@@ -32,6 +32,10 @@ export default{
 }
 </script>
 <style scoped>
+.search{
+  overflow-y: scroll;
+  height: 100%;
+}
 h1{
     font-size: 14px;
     font-weight: normal;
