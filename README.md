@@ -5,6 +5,21 @@
 ## 效果图
 ![其实我不是客户端](show.gif)
 
+## 使用
+```
+git clone https://github.com/ShanaMaid/vue-163-music.git
+
+cd vue-163-music
+
+npm install 
+
+cd server
+
+node app.js
+
+访问 http://localhost:3000/
+```
+
 ## 模块
 发现音乐
 - [x] 个性推荐
