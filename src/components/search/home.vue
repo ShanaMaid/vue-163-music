@@ -1,6 +1,6 @@
 <template>
     <div class="search">
-      <h1>搜索<span class="searchname">"{{this.$store.state.searchName}}"</span>，找到{{this.$store.state.searchResult.songCount}}首单曲</h1>
+      <h1>搜索<span class="searchname">"{{this.$store.state.search.searchName}}"</span>，找到{{this.$store.state.search.searchResult.count}}{{tail[topName]}}</h1>
       <dl>
           <router-link to="/search/single"><dd :class="{choosed: topName =='single'}">单曲</dd></router-link>
           <router-link to="/search/singer"><dd :class="{choosed: topName =='singer'}">歌手</dd></router-link>
@@ -18,14 +18,23 @@
 export default{
   data () {
     return {
-      names: '1'
+      names: '1',
+      tail: {
+        'single': '首单曲',
+        'station': '个节目',
+        'singer': '位歌手',
+        'ablum': '张专辑',
+        'mv': '首mv',
+        'songlist': '个歌单',
+        'word': '首单曲',
+        'user': '位用户'
+      }
     }
   },
   computed: {
     topName: function () {
       let path = this.$route.path
       path = path.substr(path.lastIndexOf('/') + 1)
-      console.log(path)
       return path
     }
   }

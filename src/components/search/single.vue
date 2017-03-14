@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="songCount">
+    <template v-if="count">
       <div class="single">
           <ul class="songlist">
             <li class="head">
@@ -12,7 +12,7 @@
                 <div style="width:8.75%">时长</div>
                 <div style="width:16.25%">热度</div>
             </li>
-            <template v-for="(value, key) in this.$store.state.searchResult.list">
+            <template v-for="(value, key) in list">
               <li class="item" @dblclick="$store.commit('addSong', value.mp3Url)">
                   <div style="width:6.25%">{{key + 1}}</div>
                   <div style="width:6.25%">&nbsp</div>
@@ -42,8 +42,12 @@ export default{
     }
   },
   computed: {
-    songCount: function () {
-      return this.$store.state.searchResult.songCount
+    count: function () {
+      console.log(this.$store.state.search.searchResult.count)
+      return this.$store.state.search.searchResult.count
+    },
+    list: function () {
+      return this.$store.state.search.searchResult.list
     }
   }
 }
@@ -51,10 +55,6 @@ export default{
 <style>
 *{
   box-sizing: border-box;
-}
-
-ul{
-  margin-top: 50px;
 }
 
 li{

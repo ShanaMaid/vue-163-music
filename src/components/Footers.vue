@@ -115,7 +115,7 @@ export default {
   },
   computed: {
     mp3Url: function () {
-      return this.$store.state.songList[0]
+      return this.$store.state.search.songList[0]
     }
   },
   watch: {

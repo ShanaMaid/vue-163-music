@@ -4,7 +4,7 @@
 		<div v-show="show" name="downlist" id="downlist">
     		<em></em>
     		<dl class="content">
-    			<dt>热门搜索</dt>
+    			<dt>{{topName}}</dt>
     			<dd>Coldplay</dd>
     			<dd>赵雷</dd>
     			<dd>让我留在你身边</dd>
@@ -20,12 +20,23 @@
 	</div>
 </template>
 <script>
+import search from '../deal/search'
 export default{
   data () {
     return {
       app: '网易云音乐',
       show: false,
-      s: ''
+      s: '',
+      type: {
+        'single': 1,
+        'ablum': 10,
+        'singer': 100,
+        'songlist': 1000,
+        'user': 1002,
+        'mv': 1004,
+        'word': 1006,
+        'station': 1009
+      }
     }
   },
   methods: {
@@ -33,42 +44,37 @@ export default{
       this.show = !this.show
     },
     search: function () {
-      console.log(this.show)
       if (new Set(...this.s).has(' ') || this.s === '') {
         alert('别调皮啦！输入正确歌名')
         this.display()
         return
       }
+      let itemName = new Set(Object.keys(this.type))
+      let type = itemName.has(this.topName) ? this.topName : 'single'
       this.$store.commit('setSearchName', this.s)
-      this.$http.post('/api/search/pc', {s: this.s, limit: 100, type: 1}).then(response => {
-        console.log(response.body)
-        let list = []
-        let result = {songCount: response.body.result.songCount}
-        if (response.body.result.songCount > 0) {
-          for (let item of response.body.result.songs) {
-            let singer = ''
-            let {
-              name,
-              mp3Url,
-              duration,
-              album: {
-                name: albumName
-              }
-            } = item
-            for (let item of item.artists) {
-              singer += item.name + ' '
-            }
-            list.push({name, mp3Url, duration, albumName, singer})
-          }
-          result = {list, songCount: response.body.result.songCount}
-        }
-        console.log(result)
+      this.$http.post('/api/search/pc', {s: this.s, limit: 100, type: this.type[type]}).then(response => {
+        let result = search[type](response.body)
         console.log(response.body)
         this.$store.commit('setSearchResult', result)
-        this.$router.push({path: '/search'})
+        this.$router.push({path: '/search/' + type})
       }, response => {
         alert('网络存在问题，无法搜索')
       })
+    }
+  },
+  computed: {
+    topName: function () {
+      let path = this.$route.path
+      path = path.substr(path.lastIndexOf('/') + 1)
+      return path
+    }
+  },
+  watch: {
+    topName: function (newVal) {
+      let itemName = new Set(Object.keys(this.type))
+      if (itemName.has(newVal) && !new Set(...this.s).has(' ') && this.s !== '') {
+        this.search()
+      }
     }
   }
 }
