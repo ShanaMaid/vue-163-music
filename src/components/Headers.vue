@@ -2,12 +2,12 @@
 	<div class="headers" name="header">
 		<dl>
 			<dd class="logo">
-				<img src="../assets/logo2.jpg">
+				<router-link to="/find/"><img src="../assets/logo2.jpg"></router-link>
 			</dd>
 			<dd class="control">
 				<div>
-					<img src="../assets/pre.png">
-					<img src="../assets/next.png">
+					<img @click="$router.go(-1)" src="../assets/pre.png">
+					<img @click="$router.go(1)" src="../assets/next.png">
 				</div>
 			</dd>
 			<dd>
@@ -94,5 +94,8 @@ dl dd:first-child{
 	text-align: right;
 }
 
+.disabled{
+	opacity: 0.5;
+}
 
 </style>

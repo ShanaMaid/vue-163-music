@@ -1,13 +1,13 @@
 <template>
     <div name="perosonmsg" class="person">
-        <a href="#"><img class="small"  src="../assets/head.jpg"></a>
+        <a href="#"><img class="small"  src="static/img/head.jpg"></a>
         <span @focus="display" @blur="display" tabindex="1">向日葵与薄荷草</span>
         <em @focus="display" @blur="display" tabindex="1"></em>
         <div v-show="show" name="downlist" id="downlist">
         <em></em>
         <dl class="content">
             <dt>
-                <img class="headpic" src="../assets/head.jpg">
+                <img class="headpic" src="static/img/head.jpg">
                 <span>向日葵与薄荷草</span>
                 <button>签到</button>
                 <div>

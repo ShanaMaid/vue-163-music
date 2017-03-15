@@ -1,11 +1,10 @@
 <template>
 	<dd class="item animated fadeIn" v-bind:style="{width:width}">
-      <p v-if="!down" class="more animated fadeInDown">{{msg}}</p>
-      <p v-if="!down" class="number animated fadeIn"><img src="../../assets/headset.png">{{number}}</p>
-      <img v-bind:src="imgSrc">
-      <span >{{introduce}}</span>
-      <em v-if="!down" class="animated fadeIn"></em>
-
+    <p v-if="!down" class="more animated fadeInDown">{{msg}}</p>
+    <p v-if="!down" class="number animated fadeIn"><img src="../../assets/headset.png">{{number}}</p>
+    <img v-bind:src="imgSrc">
+    <span >{{introduce}}</span>
+    <em v-if="!down" class="animated fadeIn"></em>
   </dd>
 </template>
 <script >

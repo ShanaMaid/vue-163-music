@@ -1,14 +1,19 @@
 <template>
     <div>
        <div class="mv">
-         <div class="item" v-for="val in list">
-           <img :src="val.src">
-           <p class="name">{{val.name}}</p>
-           <p class="author">{{val.nickname}}</p>
-           <span class="playcount"><img class="icon" src="../../assets/camera.png">{{val.playCount | playCount}}</span>
-           <span class="time">{{val.duration | durationToTime}}</span>
-         </div>
+          <template v-if="count !== 0">
+            <div class="item" v-for="val in list">
+             <img :src="val.src">
+             <p class="name">{{val.name}}</p>
+             <p class="author">{{val.nickname}}</p>
+             <span class="playcount"><img class="icon" src="../../assets/camera.png">{{val.playCount | playCount}}</span>
+             <span class="time">{{val.duration | durationToTime}}</span>
+           </div>
+          </template>
        </div>
+       <template v-if='count === 0'>
+          <h1 class="fail">很抱歉,未能找到与<span class="searchName">“{{search}}”</span>相关的任何MV</h1>
+        </template>
     </div>
 </template>
 <script>
@@ -16,6 +21,9 @@ export default{
   computed: {
     count: function () {
       return this.$store.state.search.searchResult.count
+    },
+    search: function () {
+      return this.$store.state.search.searchName
     },
     list: function () {
       return this.$store.state.search.searchResult.list
@@ -26,8 +34,8 @@ export default{
 <style scoped>
 .mv{
   display: flex;
+  flex-flow: row wrap;
   justify-content: space-between;
-  flex-wrap: wrap;
   padding-left: 30px;
   padding-right: 20px;
   padding-top: 20px;
@@ -81,5 +89,16 @@ export default{
   height: 14px;
   vertical-align: text-bottom;
   margin-right: 2px;
+}
+
+.fail{
+  line-height: 180px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.searchName{
+  color: rgb(12,115,194);
 }
 </style>

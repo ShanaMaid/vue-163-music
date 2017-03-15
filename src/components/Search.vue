@@ -4,7 +4,7 @@
 		<div v-show="show" name="downlist" id="downlist">
     		<em></em>
     		<dl class="content">
-    			<dt>{{topName}}</dt>
+    			<dt>热门搜索</dt>
     			<dd>Coldplay</dd>
     			<dd>赵雷</dd>
     			<dd>让我留在你身边</dd>

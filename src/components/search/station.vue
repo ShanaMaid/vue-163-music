@@ -1,14 +1,15 @@
 <template>
     <div>
-       <h1>主播电台</h1>
+      <template v-if='count > 0'>
+       <h1 class="title">主播电台</h1>
        <div class="station">
           <div class="item" v-for="val in station">
             <img :src="val.src">
             <p>{{val.name}}</p>
-            <p class="station-author">{{val.nickname}}</p>
+            <p class="station-author">by&nbsp {{val.nickname}}</p>
           </div>
        </div>
-       <h1>单期节目</h1>
+       <h1 class="title">单期节目</h1>
        <ul>
           <li v-for="val in list" @dblclick="$store.commit('addSong', val.mp3Url)">
             <img :src="val.src">
@@ -17,6 +18,10 @@
             <span class="count">播放：{{val.listenerCount}}</span>
           </li> 
        </ul>
+      </template>
+      <template v-if='count === 0'>
+        <h1 class="fail">很抱歉,未能找到与<span class="searchName">“{{search}}”</span>相关的任何电台或者节目</h1>
+      </template>
     </div>
 </template>
 <script>
@@ -28,6 +33,9 @@ export default{
     station: function () {
       return this.$store.state.search.searchResult.station
     },
+    search: function () {
+      return this.$store.state.search.searchName
+    },
     list: function () {
       return this.$store.state.search.searchResult.list
     }
@@ -35,7 +43,7 @@ export default{
 }
 </script>
 <style scoped>
-h1{
+h1.title{
   color: rgb(102,102,102);
   font-size: 12px;
   font-weight: normal;
@@ -50,11 +58,11 @@ h1{
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  height: 460px;
   padding-left: 30px;
   padding-right: 20px;
   padding-top: 10px;
   width: 100%;
+  margin-bottom: 50px;
 }
 
 .item{
@@ -123,5 +131,16 @@ ul li:hover{
 
 .count{
   width: 100px;
+}
+
+.fail{
+  line-height: 180px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.searchName{
+  color: rgb(12,115,194);
 }
 </style>

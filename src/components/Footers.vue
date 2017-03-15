@@ -12,7 +12,6 @@
       <span>{{end}}</span>
       <img class="volume" src="../assets/volume.png">
       <vue-slider class="volumeprogress" ref="slider2" v-bind="setting2" style="display:inline-block;padding:15px 10px;" v-model="volume"></vue-slider>
-
       <audio 
         @canplay="audioInit" ref="player" 
         @ended="ended" 
@@ -20,15 +19,20 @@
         @timeupdate = "setCurrent"
         style="display:none" :src="mp3Url"  controls="controls"></audio>
     </div>
+    <div class="playlist" tabindex="10" @focus="listShow = !listShow" @blur="listShow = !listShow">392
+      <play-list class="list" v-show="listShow"/>
+    </div>
+    
 	</div>
 </template>
 <script >
 import VueSlider from 'vue-slider-component'
-
+import PlayList from './play-list'
 export default {
   name: 'footers',
   components: {
-    VueSlider
+    VueSlider,
+    PlayList
   },
   data () {
     return {
@@ -62,7 +66,8 @@ export default {
       current: '00:00',
       end: '00:00',
       update: '',
-      drag: false
+      drag: false,
+      listShow: false
     }
   },
   mounted: function () {
@@ -147,6 +152,7 @@ export default {
   border: 1px solid rgb(225,225,226);
   padding: 5px 0px;
   padding-left: 30px;
+  position: relative;
 }
 
 .pre,
@@ -190,6 +196,35 @@ export default {
   left: 5px;
 }
 
+.playlist{
+  position: absolute;
+  right: 20px;
+  width: 45px;
+  height: 20px;
+  padding-right: 4px;
+  text-align: right;
+  background-image: url('../assets/playlist.jpg');
+  background-position: 0px 0px;
+  background-size: 20px 25px;
+  background-repeat: no-repeat;
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 20px;
+  background-color: rgb(225,225,226);
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  cursor: pointer;
+}
+
+.list{
+  position: absolute;
+  width: 580px;
+  height: 480px;
+  right: 0px;
+  top:-480px;
+  z-index: 100;
+  cursor: default;
+}
 </style>
 <style>
  .vue-slider-dot{
@@ -208,5 +243,4 @@ export default {
   background-size: 4px 4px;
   background-position: 3px;
 }
-
 </style>

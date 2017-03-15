@@ -1,11 +1,14 @@
 <template>
     <div>
-       <ul>
-           <li v-for="val in list">
-                <img :src="val.src">
-                <span>{{val.name}}</span>
-            </li>
-       </ul>
+      <ul>
+        <li v-for="val in list">
+          <img :src="val.src">
+          <span>{{val.name}}</span>
+        </li>
+      </ul>
+      <template v-if='count === 0'>
+        <h1 class="fail">很抱歉,未能找到与<span class="searchName">“{{search}}”</span>相关的任何歌手</h1>
+      </template>
     </div>
 </template>
 <script>
@@ -13,6 +16,9 @@ export default{
   computed: {
     count: function () {
       return this.$store.state.search.searchResult.count
+    },
+    search: function () {
+      return this.$store.state.search.searchName
     },
     list: function () {
       return this.$store.state.search.searchResult.list
@@ -45,4 +51,14 @@ ul li:hover{
   background-color: rgb(235,236,237);
 }
 
+.fail{
+  line-height: 180px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.searchName{
+  color: rgb(12,115,194);
+}
 </style>

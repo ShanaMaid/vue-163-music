@@ -1,7 +1,17 @@
+let objectIsNull = (obj) => {
+  for (let item in obj) {
+    return !item
+  }
+  return true
+}
+
 export default{
-  single: function (data) {
+  single: (data) => {
     let list = []
-    let result = {}
+    let count = data.result.songCount
+    if (count === 0) {
+      return {list, count}
+    }
     for (let item of data.result.songs) {
       let singer = ''
       let {
@@ -17,12 +27,14 @@ export default{
       }
       list.push({name, mp3Url, duration, albumName, singer})
     }
-    result = {list, count: data.result.songCount}
-    return result
+    return {list, count}
   },
-  singer: function (data) {
+  singer: (data) => {
     let list = []
-    let result = {}
+    let count = data.result.artistCount
+    if (count === 0) {
+      return {list, count}
+    }
     for (let item of data.result.artists) {
       let {
         img1v1Url: src,
@@ -31,14 +43,17 @@ export default{
       if (item.alias.length !== 0) {
         name += '(' + item.alias.join(',') + ')'
       }
+      src += '?param=40y40'
       list.push({src, name})
     }
-    result = {list, count: data.result.artistCount}
-    return result
+    return {list, count}
   },
-  ablum: function (data) {
+  ablum: (data) => {
     let list = []
-    let result = {}
+    let count = data.result.albumCount
+    if (count === 0) {
+      return {list, count}
+    }
     for (let item of data.result.albums) {
       let {
         blurPicUrl: src,
@@ -52,14 +67,17 @@ export default{
       if (item.alias.length !== 0) {
         name += '(' + item.alias.join(',') + ')'
       }
+      src += '?param=40y40'
       list.push({src, name, singer})
     }
-    result = {list, count: data.result.albumCount}
-    return result
+    return {list, count}
   },
-  songlist: function (data) {
+  songlist: (data) => {
     let list = []
-    let result = {}
+    let count = data.result.playlistCount
+    if (count === 0) {
+      return {list, count}
+    }
     for (let item of data.result.playlists) {
       let {
         name,
@@ -69,14 +87,17 @@ export default{
           nickname
         }
       } = item
+      src += '?param=40y40'
       list.push({src, name, count, nickname})
     }
-    result = {list, count: data.result.playlistCount}
-    return result
+    return {list, count}
   },
-  user: function (data) {
+  user: (data) => {
     let list = []
-    let result = {}
+    let count = data.result.userprofileCount
+    if (count === 0) {
+      return {list, count}
+    }
     for (let item of data.result.userprofiles) {
       let {
         nickname,
@@ -84,14 +105,18 @@ export default{
         gender,
         signature
       } = item
+      src += '?param=40y40'
       list.push({src, nickname, gender, signature})
     }
-    result = {list, count: data.result.userprofileCount}
-    return result
+    return {list, count}
   },
-  station: function (data) {
+  station: (data) => {
     let station = []
     let list = []
+    if (objectIsNull(data.result)) {
+      return {list, count: 0}
+    }
+    let count = data.result.djprogramCount
     for (let item of data.result.djRadios) {
       let {
         picUrl: src,
@@ -115,14 +140,17 @@ export default{
         },
         serialNum
       } = item
+      src += '?param=40y40'
       list.push({src, name, listenerCount, mp3Url, brand, serialNum})
     }
-    let result = {station, list, count: data.result.djprogramCount}
-    return result
+    return {station, list, count}
   },
-  mv: function (data) {
+  mv: (data) => {
     let list = []
-    let result = {}
+    if (objectIsNull(data.result)) {
+      return {list, count: 0}
+    }
+    let count = data.result.mvCount
     for (let item of data.result.mvs) {
       let {
         id,
@@ -132,9 +160,9 @@ export default{
         playCount,
         duration
       } = item
+      src += '?param=140y140'
       list.push({id, src, name, nickname, playCount, duration})
     }
-    result = {list, count: data.result.mvCount}
-    return result
+    return {list, count}
   }
 }

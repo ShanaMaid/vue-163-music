@@ -26,6 +26,9 @@
         </ul>
       </div>
     </template>
+    <template v-if='count === 0'>
+      <h1 class="fail">很抱歉,未能找到与<span class="searchName">“{{search}}”</span>相关的任何单曲</h1>
+    </template>
   </div>
 </template>
 <script>
@@ -35,6 +38,9 @@ export default{
   computed: {
     count: function () {
       return this.$store.state.search.searchResult.count
+    },
+    search: function () {
+      return this.$store.state.search.searchName
     },
     list: function () {
       return this.$store.state.search.searchResult.list
@@ -92,4 +98,14 @@ li.item:hover{
   background-color: rgb(236,237,238);
 }
 
+.fail{
+  line-height: 180px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.searchName{
+  color: rgb(12,115,194);
+}
 </style>
