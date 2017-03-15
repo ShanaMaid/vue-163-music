@@ -25,7 +25,7 @@ export default {
   font-family: microsoft yahei;
 }
 #app {
-  width: 1000px;
+  width: 1020px;
   margin: 0 auto;
   padding: 0;
   box-shadow: 0px 0px 10px 7px rgb(225,225,226);

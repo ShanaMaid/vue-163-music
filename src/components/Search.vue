@@ -49,12 +49,13 @@ export default{
         this.display()
         return
       }
+      this.$store.commit('setSearchResult', [])
       let itemName = new Set(Object.keys(this.type))
       let type = itemName.has(this.topName) ? this.topName : 'single'
       this.$store.commit('setSearchName', this.s)
       this.$http.post('/api/search/pc', {s: this.s, limit: 100, type: this.type[type]}).then(response => {
         let result = search[type](response.body)
-        console.log(response.body)
+        console.log(result)
         this.$store.commit('setSearchResult', result)
         this.$router.push({path: '/search/' + type})
       }, response => {
@@ -71,8 +72,8 @@ export default{
   },
   watch: {
     topName: function (newVal) {
-      let itemName = new Set(Object.keys(this.type))
-      if (itemName.has(newVal) && !new Set(...this.s).has(' ') && this.s !== '') {
+      let path = this.$route.path
+      if (path === '/search/' + newVal && !new Set(...this.s).has(' ') && this.s !== '') {
         this.search()
       }
     }

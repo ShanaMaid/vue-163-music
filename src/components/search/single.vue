@@ -19,7 +19,7 @@
                   <div style="width:27.5%">{{value.name}}</div>
                   <div style="width:15%">{{value.singer}}</div>
                   <div style="width:20%">{{value.albumName}}</div>
-                  <div style="width:8.75%">{{value.duration | toTime}}</div>
+                  <div style="width:8.75%">{{value.duration | durationToTime}}</div>
                   <div style="width:16.25%"></div>
               </li>
             </template>
@@ -32,18 +32,8 @@
 export default{
   method: {
   },
-  filters: {
-    toTime: function (value) {
-      let min = Number.parseInt(value / (60 * 1000), 10) + ''
-      let seconds = Number.parseInt((value / 1000) % 60, 10) + ''
-      min = min.length === 1 ? ('0' + min) : min
-      seconds = seconds.length === 1 ? ('0' + seconds) : seconds
-      return min + ':' + seconds
-    }
-  },
   computed: {
     count: function () {
-      console.log(this.$store.state.search.searchResult.count)
       return this.$store.state.search.searchResult.count
     },
     list: function () {

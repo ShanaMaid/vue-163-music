@@ -30,7 +30,10 @@ module.exports = {
     proxyTable: {
         '/api': {
             target: 'http://music.163.com',
-            changeOrigin: true
+            changeOrigin: true,
+            headers: {
+                Referer: 'http://music.163.com/'
+            }
         }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

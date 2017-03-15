@@ -3,7 +3,14 @@ var proxy = require('http-proxy-middleware');
 
 var app = express();
 app.use('/static', express.static('static'));
-app.use('/api', proxy({target: 'http://music.163.com', changeOrigin: true}));
+app.use('/api', proxy({
+  target: 'http://music.163.com', 
+  changeOrigin: true, 
+  headers: {
+    Referer: 'http://music.163.com/'
+  }
+}
+));
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');

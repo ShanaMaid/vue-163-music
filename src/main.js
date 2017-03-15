@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import http from 'vue-resource'
 import store from './store'
+import './filters'
 import 'animate.css/animate.min.css'
 
 Vue.use(http)

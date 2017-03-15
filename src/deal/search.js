@@ -1,102 +1,140 @@
 export default{
   single: function (data) {
     let list = []
-    let result = {count: data.result.songCount}
-    if (data.result.songCount > 0) {
-      for (let item of data.result.songs) {
-        let singer = ''
-        let {
-          name,
-          mp3Url,
-          duration,
-          album: {
-            name: albumName
-          }
-        } = item
-        for (let item of item.artists) {
-          singer += item.name + ' '
+    let result = {}
+    for (let item of data.result.songs) {
+      let singer = ''
+      let {
+        name,
+        mp3Url,
+        duration,
+        album: {
+          name: albumName
         }
-        list.push({name, mp3Url, duration, albumName, singer})
+      } = item
+      for (let item of item.artists) {
+        singer += item.name + ' '
       }
-      result = {list, count: data.result.songCount}
+      list.push({name, mp3Url, duration, albumName, singer})
     }
+    result = {list, count: data.result.songCount}
     return result
   },
   singer: function (data) {
     let list = []
-    let result = {count: data.result.artistCount}
-    if (data.result.artistCount > 0) {
-      for (let item of data.result.artists) {
-        let {
-          img1v1Url: src,
-          name
-        } = item
-        if (item.alias.length !== 0) {
-          name += '(' + item.alias.join(',') + ')'
-        }
-        list.push({src, name})
+    let result = {}
+    for (let item of data.result.artists) {
+      let {
+        img1v1Url: src,
+        name
+      } = item
+      if (item.alias.length !== 0) {
+        name += '(' + item.alias.join(',') + ')'
       }
-      result = {list, count: data.result.artistCount}
+      list.push({src, name})
     }
+    result = {list, count: data.result.artistCount}
     return result
   },
   ablum: function (data) {
     let list = []
-    let result = {count: data.result.albumCount}
-    if (data.result.albumCount > 0) {
-      for (let item of data.result.albums) {
-        let {
-          blurPicUrl: src,
-          name
-        } = item
-        let singer = []
-        for (let artist of item.artists) {
-          singer.push(artist.name)
-        }
-        singer = singer.join(',')
-        if (item.alias.length !== 0) {
-          name += '(' + item.alias.join(',') + ')'
-        }
-        list.push({src, name, singer})
+    let result = {}
+    for (let item of data.result.albums) {
+      let {
+        blurPicUrl: src,
+        name
+      } = item
+      let singer = []
+      for (let artist of item.artists) {
+        singer.push(artist.name)
       }
-      result = {list, count: data.result.albumCount}
+      singer = singer.join(',')
+      if (item.alias.length !== 0) {
+        name += '(' + item.alias.join(',') + ')'
+      }
+      list.push({src, name, singer})
     }
+    result = {list, count: data.result.albumCount}
     return result
   },
   songlist: function (data) {
     let list = []
-    let result = {count: data.result.playlistCount}
-    if (data.result.playlistCount > 0) {
-      for (let item of data.result.playlists) {
-        let {
-          name,
-          trackCount: count,
-          coverImgUrl: src,
-          creator: {
-            nickname
-          }
-        } = item
-        list.push({src, name, count, nickname})
-      }
-      result = {list, count: data.result.playlistCount}
+    let result = {}
+    for (let item of data.result.playlists) {
+      let {
+        name,
+        trackCount: count,
+        coverImgUrl: src,
+        creator: {
+          nickname
+        }
+      } = item
+      list.push({src, name, count, nickname})
     }
+    result = {list, count: data.result.playlistCount}
     return result
   },
   user: function (data) {
     let list = []
-    let result = {count: data.result.userprofileCount}
-    if (data.result.userprofileCount > 0) {
-      for (let item of data.result.userprofiles) {
-        let {
-          nickname,
-          avatarUrl: src,
-          gender,
-          signature
-        } = item
-        list.push({src, nickname, gender, signature})
-      }
-      result = {list, count: data.result.userprofileCount}
+    let result = {}
+    for (let item of data.result.userprofiles) {
+      let {
+        nickname,
+        avatarUrl: src,
+        gender,
+        signature
+      } = item
+      list.push({src, nickname, gender, signature})
     }
+    result = {list, count: data.result.userprofileCount}
+    return result
+  },
+  station: function (data) {
+    let station = []
+    let list = []
+    for (let item of data.result.djRadios) {
+      let {
+        picUrl: src,
+        name,
+        dj: {
+          nickname
+        }
+      } = item
+      station.push({src, nickname, name})
+    }
+    for (let item of data.result.djprograms) {
+      let {
+        coverUrl: src,
+        name,
+        listenerCount,
+        mainSong: {
+          mp3Url
+        },
+        dj: {
+          brand
+        },
+        serialNum
+      } = item
+      list.push({src, name, listenerCount, mp3Url, brand, serialNum})
+    }
+    let result = {station, list, count: data.result.djprogramCount}
+    return result
+  },
+  mv: function (data) {
+    let list = []
+    let result = {}
+    for (let item of data.result.mvs) {
+      let {
+        id,
+        name,
+        cover: src,
+        artists: [{name: nickname}],
+        playCount,
+        duration
+      } = item
+      list.push({id, src, name, nickname, playCount, duration})
+    }
+    result = {list, count: data.result.mvCount}
     return result
   }
 }

@@ -45,6 +45,7 @@ export default {
 	height: 100%;
   background-color: rgb(245,245,247);
   overflow-y: scroll;
+  border-right: 1px solid rgb(225,225,226)
 }
 
 dt,dd{
