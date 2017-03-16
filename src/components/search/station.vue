@@ -11,7 +11,7 @@
        </div>
        <h1 class="title">单期节目</h1>
        <ul>
-          <li v-for="val in list" @dblclick="$store.commit('addSong', val.mp3Url)">
+          <li v-for="val in list" @dblclick="$store.commit('addSong', val)">
             <img :src="val.src">
             <span class="name">「{{val.name}}」</span>
             <span class="author">{{val.brand + '-Vol.' + val.serialNum}}首</span>

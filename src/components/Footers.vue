@@ -16,11 +16,10 @@
         @canplay="audioInit" ref="player" 
         @ended="ended" 
         @error="errorLoad"
-        @timeupdate = "setCurrent"
         style="display:none" :src="mp3Url"  controls="controls"></audio>
     </div>
-    <div class="playlist" tabindex="10" @focus="listShow = !listShow" @blur="listShow = !listShow">392
-      <play-list class="list" v-show="listShow"/>
+    <div class="playlist" tabindex="10" @focus="listShow = true" @blur="listShow = false">{{list.length}}
+      <play-list class="list" @setShow="setShow" :list="list" v-show="listShow"/>
     </div>
     
 	</div>
@@ -113,14 +112,18 @@ export default {
       alert('该歌曲网易云具有版权，无法播放')
       this.play = false
     },
-    setCurrent: function () {
-      // this.current = this.timeToStr(newValue)
-      // this.$refs.player.currentTime = this.current
+    setShow: function (show) {
+      this.listShow = show
     }
   },
   computed: {
     mp3Url: function () {
-      return this.$store.state.search.songList[0]
+      let list = this.$store.state.search.songList
+      return list.length === 0 ? list[0] : list[0].mp3Url
+    },
+    list: function () {
+      console.log(11)
+      return this.$store.state.search.songList
     }
   },
   watch: {
@@ -132,9 +135,6 @@ export default {
     },
     volume: function (newValue) {
       this.$refs.player.volume = newValue / 100
-    },
-    mp3Url: function () {
-      this.playMusic()
     }
   }
 }
@@ -214,14 +214,15 @@ export default {
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
   cursor: pointer;
+  outline: none;
 }
 
 .list{
   position: absolute;
   width: 580px;
   height: 480px;
-  right: 0px;
-  top:-480px;
+  right: -20px;
+  top:-495px;
   z-index: 100;
   cursor: default;
 }

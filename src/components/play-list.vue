@@ -6,13 +6,36 @@
           <div class="choosed">播放列表</div>
           <div>历史记录</div>
         </div>
-        <div class="close">×</div>
+        <div class="close" @click="setShow">×</div>
       </div>
+      <div class="title">
+        <span class="sum">总{{list.length}}首</span>
+        <span class="clear">清空</span>
+        <span class="collect">收藏全部</span>
+        
+      </div>
+      <ul class="song-list">
+        <li v-for="val in list">
+          <span style="width:62.5%">{{val.name}}</span>
+          <span style="width:25%" class="singer">{{val.singer}}</span>
+          <span style="">{{val.duration | durationToTime}}</span>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 <script>
 export default{
+  data () {
+    return {
+    }
+  },
+  methods: {
+    setShow: function () {
+      this.$emit('setShow', false)
+    }
+  },
+  props: ['list']
 }
 </script>
 <style scoped>
@@ -54,10 +77,85 @@ export default{
 
 .close{
   float: right;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 div.choosed{
   background-color: rgb(124,125,133);
   color: white;
+}
+
+.title{
+  height: 30px;
+  width: 100%;
+  line-height: 30px;
+  text-align: left;
+  padding: 0 30px;
+  border-bottom: 1px solid rgb(225,225,226);
+}
+
+.song-list{
+  height: calc(100% - 70px);
+  overflow-y: scroll;
+  text-align: left;
+}
+
+li{
+  height: 25px;
+  line-height: 25px;
+  padding: 0px 30px;
+}
+
+
+li:nth-child(even){
+  background-color: rgb(245,245,247);
+}
+
+li:hover{
+  background-color: rgb(236,237,238);
+}
+
+li:hover span{
+  color: black;
+}
+
+li span{
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.singer{
+  color: rgb(136,136,136);
+}
+
+.clear,
+.collect{
+  float: right;
+  display: inline-block;
+  box-sizing: content-box;
+  padding: 0px 10px;
+}
+
+
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #F5F5F5;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  background-color: rgb(245,245,247);
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgb(225,225,226);
+  background-color: rgb(225,225,226);
 }
 </style>
