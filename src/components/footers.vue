@@ -1,10 +1,10 @@
 <template>
 	<div id="footers" name="footers">
     <div class="control">
-      <img class="pre" @click="getCurrent" src="../assets/music_pre.png">
+      <img class="pre" src="../assets/music_pre.png" @click="$store.commit('changeSong', 'pre')">
       <img class="play" @click="playMusic" src="../assets/music_play.png" :style="{display: !play ? 'inline-block' : 'none'}">
       <img class="play" @click="pauseMusic" src="../assets/music_stop.png" :style="{display: !play ? 'none' : 'inline-block'}">
-      <img class="next" src="../assets/music_next.png">
+      <img class="next" src="../assets/music_next.png" @click="$store.commit('changeSong', 'next')">
     </div>
     <div class="progress">
       <span>{{current}}</span>
@@ -18,8 +18,8 @@
         @error="errorLoad"
         style="display:none" :src="mp3Url"  controls="controls"></audio>
     </div>
-    <div class="playlist" tabindex="10" @focus="listShow = true" @blur="listShow = false">{{list.length}}
-      <play-list class="list" @setShow="setShow" :list="list" v-show="listShow"/>
+    <div class="playlist" tabindex="10" @click.capture="listShow = true" @focus="listShow = true" @blur="listShow = false">{{list.length}}
+      <play-list class="list" @setShow="setShow" :list="list" v-show="listShow" :current="currentSong"/>
     </div>
     
 	</div>
@@ -119,11 +119,13 @@ export default {
   computed: {
     mp3Url: function () {
       let list = this.$store.state.search.songList
-      return list.length === 0 ? list[0] : list[0].mp3Url
+      return list.length === 0 ? list[0] : list[this.$store.state.search.currentSong].mp3Url
     },
     list: function () {
-      console.log(11)
       return this.$store.state.search.songList
+    },
+    currentSong: function () {
+      return this.$store.state.search.currentSong
     }
   },
   watch: {

@@ -18,6 +18,7 @@ export default{
         name,
         mp3Url,
         duration,
+        id,
         album: {
           name: albumName
         }
@@ -25,7 +26,7 @@ export default{
       for (let item of item.artists) {
         singer += item.name + ' '
       }
-      list.push({name, mp3Url, duration, albumName, singer})
+      list.push({name, mp3Url, duration, id, albumName, singer})
     }
     return {list, count}
   },
@@ -111,6 +112,7 @@ export default{
     return {list, count}
   },
   station: (data) => {
+    console.log(data)
     let station = []
     let list = []
     if (objectIsNull(data.result)) {
@@ -133,15 +135,18 @@ export default{
         name,
         listenerCount,
         mainSong: {
-          mp3Url
+          mp3Url,
+          id,
+          artists: [{name: singer}]
         },
+        duration,
         dj: {
           brand
         },
         serialNum
       } = item
       src += '?param=40y40'
-      list.push({src, name, listenerCount, mp3Url, brand, serialNum})
+      list.push({src, name, listenerCount, mp3Url, id, duration, brand, singer, serialNum})
     }
     return {station, list, count}
   },

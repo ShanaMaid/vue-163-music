@@ -15,7 +15,7 @@
         
       </div>
       <ul class="song-list">
-        <li v-for="val in list">
+        <li v-for="(val, index) in list" @dblclick="$store.commit('changeSong',index)" :class="{playing:current === index}" >
           <span style="width:62.5%">{{val.name}}</span>
           <span style="width:25%" class="singer">{{val.singer}}</span>
           <span style="">{{val.duration | durationToTime}}</span>
@@ -35,7 +35,7 @@ export default{
       this.$emit('setShow', false)
     }
   },
-  props: ['list']
+  props: ['list', 'current']
 }
 </script>
 <style scoped>
@@ -105,6 +105,7 @@ li{
   height: 25px;
   line-height: 25px;
   padding: 0px 30px;
+  position: relative;
 }
 
 
@@ -139,6 +140,16 @@ li span{
   padding: 0px 10px;
 }
 
+.playing::before{
+  content: " ";
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  border: 5px solid transparent;
+  border-left:7px solid rgb(198,47,47);
+  top: 7px;
+  left: 10px;
+}
 
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
