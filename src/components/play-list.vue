@@ -10,9 +10,8 @@
       </div>
       <div class="title">
         <span class="sum">总{{list.length}}首</span>
-        <span class="clear">清空</span>
+        <span class="clear" @click="clearList">清空</span>
         <span class="collect">收藏全部</span>
-        
       </div>
       <ul class="song-list">
         <li v-for="(val, index) in list" @dblclick="$store.commit('changeSong',index)" :class="{playing:current === index}" >
@@ -32,7 +31,10 @@ export default{
   },
   methods: {
     setShow: function () {
-      this.$emit('setShow', false)
+      this.$emit('set-show', false)
+    },
+    clearList: function () {
+      this.$emit('clear-list', 'all')
     }
   },
   props: ['list', 'current']
@@ -138,6 +140,7 @@ li span{
   display: inline-block;
   box-sizing: content-box;
   padding: 0px 10px;
+  cursor: pointer;
 }
 
 .playing::before{

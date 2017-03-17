@@ -11,6 +11,7 @@ import Mv from 'components/mv/'
 import Singer from 'components/singer/'
 import Station from 'components/station/'
 import Search from 'components/search/index.js'
+import PlayList from 'components/playlist'
 
 Vue.use(Router)
 
@@ -26,6 +27,7 @@ export default new Router({
     Singer,
     Station,
     Search,
+    PlayList,
     {
       path: '*',
       redirect: '/find/recommend'

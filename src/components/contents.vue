@@ -25,6 +25,9 @@ export default {
       let path = this.$route.path
       path = path.substr(1)
       path = path.substr(0, path.indexOf('/'))
+      if (path === 'playlist') {
+        path = this.$route.params.id
+      }
       return path
     }
   }

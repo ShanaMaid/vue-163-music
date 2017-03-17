@@ -19,7 +19,7 @@
         style="display:none" :src="mp3Url"  controls="controls"></audio>
     </div>
     <div class="playlist" tabindex="10" @click.capture="listShow = true" @focus="listShow = true" @blur="listShow = false">{{list.length}}
-      <play-list class="list" @setShow="setShow" :list="list" v-show="listShow" :current="currentSong"/>
+      <play-list class="list" @set-show="setShow" :list="list" v-show="listShow" :current="currentSong" @clear-list="clearList"/>
     </div>
     
 	</div>
@@ -109,17 +109,27 @@ export default {
       return min + ':' + seconds
     },
     errorLoad: function () {
+      if (this.mp3Url === 'error') {
+        return
+      }
       alert('该歌曲网易云具有版权，无法播放')
       this.play = false
     },
     setShow: function (show) {
       this.listShow = show
+    },
+    clearList: function () {
+      this.$store.commit('removeSong', 'all')
     }
   },
   computed: {
     mp3Url: function () {
       let list = this.$store.state.search.songList
-      return list.length === 0 ? list[0] : list[this.$store.state.search.currentSong].mp3Url
+      if (list.length === 0) {
+        this.ended()
+        return 'error'
+      }
+      return list[this.currentSong].mp3Url
     },
     list: function () {
       return this.$store.state.search.songList

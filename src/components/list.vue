@@ -13,19 +13,19 @@
       <router-link to="/singer/"><dd :class="{choosed: choosed == 'singer'}"><span><img class="icon" src="../assets/singer.png">我的歌手</span></dd></router-link>  
       <router-link to="/station/"><dd :class="{choosed: choosed == 'station'}"><span><img class="icon" src="../assets/station.png">我的电台</span></dd></router-link>
       <dt><span>创建的歌单</span></dt>
-      <dd><span><img class="icon" src="../assets/heart.png">我喜欢的音乐</span></dd>  
-      <dd><span><img class="icon" src="../assets/list.png">light</span></dd>  
-      <dd><span><img class="icon" src="../assets/list.png">不错的歌曲</span></dd>  
-      <dd><span><img class="icon" src="../assets/list.png">少校</span></dd>  
+      <router-link to="/playlist/146135103"><dd :class="{choosed: choosed == '146135103'}"><span><img class="icon" src="../assets/heart.png">我喜欢的音乐</span></dd></router-link>
+      <router-link to="/playlist/502018684"><dd :class="{choosed: choosed == '502018684'}"><span><img class="icon" src="../assets/list.png">light</span></dd></router-link>  
+      <router-link to="/playlist/501130469"><dd :class="{choosed: choosed == '501130469'}"><span><img class="icon" src="../assets/list.png">每日歌曲推荐(2016.11.03)</span></dd></router-link>  
+      <router-link to="/playlist/418621233"><dd :class="{choosed: choosed == '418621233'}"><span><img class="icon" src="../assets/list.png">少校</span></dd></router-link>  
       <dt><span>收藏的歌单</span></dt>
-      <dd><span><img class="icon" src="../assets/list.png">纯音乐</span></dd> 
-      <dd><span><img class="icon" src="../assets/list.png">【节奏】美</span></dd> 
-      <dd><span><img class="icon" src="../assets/list.png">loli控？听这个</span></dd> 
-      <dd><span><img class="icon" src="../assets/list.png">萝莉幼女软妹</span></dd> 
-      <dd><span><img class="icon" src="../assets/list.png">耳机福利</span></dd> 
-      <dd><span><img class="icon" src="../assets/list.png">30首东方歌曲</span></dd>   
-      <dd><span><img class="icon" src="../assets/list.png">二次元の钢琴曲</span></dd> 
-      <dd><span><img class="icon" src="../assets/list.png">唯美纯音</span></dd> 
+      <router-link to="/playlist/2511154"><dd :class="{choosed: choosed == '2511154'}"><span><img class="icon" src="../assets/list.png">B站收藏动漫曲年度排行榜1-50（经典 童年）</span></dd></router-link> 
+      <router-link to="/playlist/144277359"><dd :class="{choosed: choosed == '144277359'}"><span><img class="icon" src="../assets/list.png">孤独、忧怨、哀伤、迷幻、飘渺、激昂、平静</span></dd></router-link> 
+      <router-link to="/playlist/47897219"><dd :class="{choosed: choosed == '47897219'}"><span><img class="icon" src="../assets/list.png">【节奏纯音】那些打在心跳上的旋律</span></dd></router-link> 
+      <router-link to="/playlist/49389984"><dd :class="{choosed: choosed == '49389984'}"><span><img class="icon" src="../assets/list.png">在那一瞬间，我仿佛听见了全世界崩溃的声音</span></dd></router-link> 
+      <router-link to="/playlist/117581880"><dd :class="{choosed: choosed == '117581880'}"><span><img class="icon" src="../assets/list.png">【酷到没朋友】BGM燃点爆炸（持更）</span></dd></router-link> 
+      <router-link to="/playlist/487403213"><dd :class="{choosed: choosed == '487403213'}"><span><img class="icon" src="../assets/list.png">ACG中的震撼，源于对心灵最纯粹的触动！</span></dd></router-link>   
+      <router-link to="/playlist/132467422"><dd :class="{choosed: choosed == '132467422'}"><span><img class="icon" src="../assets/list.png">喜欢纯音乐?一单就够了!</span></dd></router-link> 
+      <router-link to="/playlist/409558070"><dd :class="{choosed: choosed == '409558070'}"><span><img class="icon" src="../assets/list.png">直击你心灵最深处的感动</span></dd></router-link> 
     </dl>
 	</div>
 </template>
@@ -61,6 +61,9 @@ dd{
   font-size: 13px;
   opacity: 0.8;
   color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 dd:hover{

@@ -27,8 +27,14 @@ export default{
           state.currentSong = choice
       }
     },
-    removeSong (state, url) {
-      state
+    removeSong (state, choice) {
+      switch (choice) {
+        case 'all':
+          state.songList = []
+          state.currentSong = 0
+          state.songList.concat([])
+          break
+      }
     },
     setSearchName (state, name) {
       state.searchName = name
