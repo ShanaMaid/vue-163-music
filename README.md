@@ -19,6 +19,30 @@ node app.js
 
 访问 http://localhost:3000/
 ```
+## 目录结构
+```
+|
+|—— build 
+|—— config
+|—— server 服务端
+| |—— app.js 服务端启动入口文件
+| |—— static 打包后的资源文件
+| |__ index.html 网页入口
+|
+|——src 资源文件
+| |—— assets 组件静态资源库
+| |—— components 组件库
+| |—— deal  163api返回的JSON字符串解构
+| |—— filters 自定义过滤器
+| |—— router 路由配置
+| |—— store vuex状态管理
+| |—— App.vue 163SPA
+| |__ main.js SPA入口
+|
+|__ static 静态资源目录
+
+```
+
 
 ## 模块
 发现音乐
@@ -42,15 +66,15 @@ node app.js
 
 搜索音乐
 - [x] 单曲
-- [ ] 歌手
-- [ ] 专辑
-- [ ] MV
-- [ ] 歌单
+- [x] 歌手
+- [x] 专辑
+- [x] MV
+- [x] 歌单
 - [ ] 歌词
-- [ ] 主播电台
-- [ ] 用户
+- [x] 主播电台
+- [x] 用户
 
-- [ ] 播放音乐
+- [x] 播放音乐
 ## 路由配置
 详情见`src/router/index.js`
 
