@@ -7,6 +7,7 @@ import http from 'vue-resource'
 import store from './store'
 import './filters'
 import 'animate.css/animate.min.css'
+import '../static/css/common.css'
 
 Vue.use(http)
 Vue.http.options.emulateJSON = true

@@ -1,4 +1,4 @@
-import Home from './home'
+import Home from 'components/station/home'
 
 export default{
   path: '/station',

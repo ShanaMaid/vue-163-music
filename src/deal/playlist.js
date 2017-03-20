@@ -35,6 +35,7 @@ export default{
       list.push({name, id, singer, albumName, mp3Url, duration})
     }
     avatarUrl += '?param=40y40'
+    coverImgUrl += '?param=200y200'
     return {nickname, avatarUrl, trackCount, playCount, name, shareCount, commentCount, coverImgUrl, createTime, tags, subscribedCount, description, list}
   }
 }

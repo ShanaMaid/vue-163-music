@@ -1,4 +1,4 @@
-import Home from './home'
+import Home from 'components/personal/home'
 
 export default{
   path: '/personal',

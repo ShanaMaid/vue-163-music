@@ -1,12 +1,16 @@
 <template>
     <div>
       <ul>
-        <li v-for="val in list">
-          <img :src="val.src">
-          <span class="name">{{val.name}}</span>
-          <span class="count">{{val.count}}首</span>
-          <span class="nickname">by&nbsp{{val.nickname}}</span>
-        </li>
+        <template v-for="val in list">
+          <router-link :to="'/playlist/' + val.id">
+            <li>
+              <img :src="val.src">
+              <span class="name">{{val.name}}</span>
+              <span class="count">{{val.count}}首</span>
+              <span class="nickname">by&nbsp{{val.nickname}}</span>
+            </li>
+          </router-link>
+        </template>
       </ul>
       <template v-if='count === 0'>
         <h1 class="fail">很抱歉,未能找到与<span class="searchName">“{{search}}”</span>相关的任何歌单</h1>

@@ -1,17 +1,19 @@
 <template>
     <div>
-      <template v-if='count > 0'>
-       <h1 class="title">主播电台</h1>
-       <div class="station">
-          <div class="item" v-for="val in station">
-            <img :src="val.src">
-            <p>{{val.name}}</p>
-            <p class="station-author">by&nbsp {{val.nickname}}</p>
-          </div>
-       </div>
+      <template v-if="count > 0">
+        <template v-if="station.length > 0">
+          <h1 class="title">主播电台</h1>
+         <div class="station">
+            <div class="item" v-for="val in station">
+              <img :src="val.src">
+              <p>{{val.name}}</p>
+              <p class="station-author">by&nbsp {{val.nickname}}</p>
+            </div>
+         </div>
+        </template>
        <h1 class="title">单期节目</h1>
        <ul>
-          <li v-for="val in list" @dblclick="$store.commit('addSong', val)">
+          <li v-for="val in list" @click="$store.commit('addSong', val)">
             <img :src="val.src">
             <span class="name">「{{val.name}}」</span>
             <span class="author">{{val.brand + '-Vol.' + val.serialNum}}首</span>
@@ -57,18 +59,23 @@ h1.title{
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding-left: 30px;
   padding-right: 20px;
   padding-top: 10px;
   width: 100%;
-  margin-bottom: 50px;
 }
 
 .item{
   width: 140px;
   height: 180px;
   cursor: pointer;
+  margin-right: 14px;
+  margin-bottom: 40px;
+}
+
+.item:nth-child(5n+5){
+  margin-right: 0px;
 }
 
 .item img{

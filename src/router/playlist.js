@@ -1,4 +1,4 @@
-import Home from './home'
+import Home from 'components/playlist/home'
 
 export default{
   path: '/playlist/:id',

@@ -1,11 +1,11 @@
 <template>
-	<dd class="item animated fadeIn" v-bind:style="{width:width}">
-    <p v-if="!down" class="more animated fadeInDown">{{msg}}</p>
-    <p v-if="!down" class="number animated fadeIn"><img src="../../assets/headset.png">{{number}}</p>
-    <img v-bind:src="imgSrc">
-    <span >{{introduce}}</span>
-    <em v-if="!down" class="animated fadeIn"></em>
-  </dd>
+  	<dd class="item animated fadeIn" v-bind:style="{width:width}" @click="$router.push({path:'/playlist/'+url})">
+      <p v-if="!down" class="more animated fadeInDown">{{msg}}</p>
+      <p v-if="!down" class="number animated fadeIn"><img src="../../assets/headset.png">{{number}}</p>
+      <img v-bind:src="imgSrc">
+      <span >{{introduce}}</span>
+      <em v-if="!down" class="animated fadeIn"></em>
+    </dd>
 </template>
 <script >
 export default {
@@ -27,6 +27,9 @@ export default {
       default: false
     },
     number: {
+      default: 0
+    },
+    url: {
       default: 0
     }
   },

@@ -14,10 +14,9 @@
   },
   "dependencies": {
     "animate.css": "^3.5.2",
-    "hint.css": "^2.4.1",
+    "express": "^4.15.2",
+    "http-proxy-middleware": "^0.17.4",
     "normalize.css": "^5.0.0",
-    "nouislider": "^9.2.0",
-    "rangeslider.js": "^2.3.0",
     "vue": "^2.1.10",
     "vue-image-scroll": "^1.0.2",
     "vue-resource": "^1.2.1",

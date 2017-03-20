@@ -35,7 +35,7 @@ export default{
 .mv{
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding-left: 30px;
   padding-right: 20px;
   padding-top: 20px;
@@ -46,6 +46,11 @@ export default{
   margin-bottom: 30px;
   position: relative;
   cursor: pointer;
+  margin-right: 35px;
+}
+
+.item:nth-child(4n+4){
+  margin-right: 0px;
 }
 
 .item > img{

@@ -1,20 +1,20 @@
 <template>
-	<div class="search">
-		<span><input type="text" v-model="s" @keyup.enter = "search"  @focus="display" @blur="display"  placeholder="搜索音乐，歌手，歌词，用户"></span>
+	<div class="search" tabindex="100"  @focus="show=true" @blur="show=false">
+		<span><input type="text" v-model="s" @keyup.enter = "search" @focus="show=true" @blur="show=false" placeholder="搜索音乐，歌手，歌词，用户"><i class="search-icon" @click="search"></i></span>
 		<div v-show="show" name="downlist" id="downlist">
     		<em></em>
     		<dl class="content">
     			<dt>热门搜索</dt>
-    			<dd>Coldplay</dd>
-    			<dd>赵雷</dd>
-    			<dd>让我留在你身边</dd>
-    			<dd>皮皮虾我们走</dd>
-    			<dd>刀山火海</dd>
-    			<dd>侧田</dd>
-    			<dd>三生三世十里桃花</dd>
-    			<dd>欢乐好声音</dd>
-    			<dd>陈奕迅</dd>
-    			<dd>周杰伦</dd>
+    			<dd @click="hotSearch">Coldplay</dd>
+    			<dd @click="hotSearch">赵雷</dd>
+    			<dd @click="hotSearch">让我留在你身边</dd>
+    			<dd @click="hotSearch">皮皮虾我们走</dd>
+    			<dd @click="hotSearch">刀山火海</dd>
+    			<dd @click="hotSearch">侧田</dd>
+    			<dd @click="hotSearch">三生三世十里桃花</dd>
+    			<dd @click="hotSearch">欢乐好声音</dd>
+    			<dd @click="hotSearch">陈奕迅</dd>
+    			<dd @click="hotSearch">周杰伦</dd>
     		</dl>
 		</div>
 	</div>
@@ -40,13 +40,16 @@ export default{
     }
   },
   methods: {
-    display: function () {
-      this.show = !this.show
+    hotSearch: function (e) {
+      console.log(e.target.textContent)
+      this.s = e.target.textContent
+      this.show = false
+      this.search()
     },
     search: function () {
       if (new Set(...this.s).has(' ') || this.s === '') {
         alert('别调皮啦！输入正确歌名')
-        this.display()
+        this.show = false
         return
       }
       this.$store.commit('setSearchResult', [])
@@ -55,7 +58,6 @@ export default{
       this.$store.commit('setSearchName', this.s)
       this.$http.post('/api/search/pc', {s: this.s, limit: 100, type: this.type[type]}).then(response => {
         let result = search[type](response.body)
-        console.log(result)
         this.$store.commit('setSearchResult', result)
         this.$router.push({path: '/search/' + type})
       }, response => {
@@ -85,6 +87,10 @@ export default{
 	box-sizing: border-box;
 }
 
+.search{
+  outline: none;
+}
+
 .search input{
 	width: 220px;
 	height: 24px;
@@ -99,7 +105,7 @@ export default{
 	background-color: rgb(168,40,40);
 }
 
-.search span:before{
+.search span > i{
 	position: absolute;
 	display: block;
 	content: '';

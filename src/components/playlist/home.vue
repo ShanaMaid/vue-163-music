@@ -15,9 +15,9 @@
             <span class="create-time">{{list.createTime | unix2Time}}创建</span>
           </div>
           <div class="control">
-            <div class="play-all">
+            <div class="play-all" @click="$store.commit('addAllSong',list.list)">
               <div>播放全部</div>
-              <div class="add">＋</div>
+              <div class="add">+</div>
             </div>
             <div class="saved">收藏({{list.subscribedCount}})</div>
             <div class="share-count">分享({{list.shareCount}})</div>
@@ -27,8 +27,8 @@
             标签：<span>{{ list.tags | splitTags }}</span>
           </div>
           <div class="description">
-            <p>简介：{{ list.description }}</p>
-            <div class="drop-down">∨</div>
+            <p :class="{spread: spread}">简介：{{ list.description }}</p>
+            <div class="drop-down" @click="spread = !spread">{{ spread ? '∧' : '∨'}}</div>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
           <dd class="choosed">歌曲列表</dd>
           <dd>评论({{list.commentCount}})</dd>
           <dd>收藏者</dd>
-          <dd class="search"><input type="text" name="" placeholder="搜索歌单音乐"></dd>
+          <dd class="search"><input type="text" name="search" v-model="search" placeholder="搜索歌单音乐"></dd>
         </dl>
       </div>
       <ul class="songlist">
@@ -49,8 +49,8 @@
                 <div style="width:20%">专辑</div>
                 <div style="width:15%">时长</div>
             </li>
-            <template v-for="(value, key) in list.list">
-              <li class="item" @dblclick="$store.commit('addSong', value)">
+            <template v-for="(value, key) in filterList">
+              <li class="item" @click="$store.commit('addSong', value)">
                   <div style="width:7%">{{key + 1}}</div>
                   <div style="width:8%">&nbsp</div>
                   <div style="width:30%">{{value.name}}</div>
@@ -63,12 +63,41 @@
     </div>
 </template> 
 <script>
-import playlist from '../../deal/playlist.js'
+import playlist from 'deal/playlist.js'
+import Vue from 'vue'
+
 export default{
   data () {
     return {
-      list: []
+      list: [],
+      filterList: [],
+      search: '',
+      spread: false
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    Vue.http.post('/api/playlist/detail', {id: to.params.id}).then(response => {
+      const result = playlist.getList(response.body)
+      next(vm => {
+        if (!result) {
+          vm.$router.push({path: '/'})
+        }
+        vm.list = result
+        vm.filterList = result.list
+      })
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log(111)
+    this.$http.post('/api/playlist/detail', {id: to.params.id}).then(response => {
+      const result = playlist.getList(response.body)
+      if (!result) {
+        this.$router.push({path: '/'})
+      }
+      this.list = result
+      this.filterList = result.list
+      next()
+    })
   },
   methods: {
     getList: function () {
@@ -78,21 +107,23 @@ export default{
           this.$router.push({path: '/'})
         }
         this.list = result
+        console.log(this.list)
+        this.filterList = result.list
       })
     }
   },
-  computed: {
-    id: function () {
-      return this.$route.params.id
-    }
-  },
   watch: {
-    id: function () {
-      this.getList()
+    search () {
+      let arr = []
+      let regexp = new RegExp(this.search, 'i')
+      for (let item of this.list.list) {
+        let str = item.name + item.singer + item.albumName
+        if (str.search(regexp) !== -1) {
+          arr.push(item)
+        }
+      }
+      this.filterList = arr
     }
-  },
-  beforeMount: function () {
-    this.getList()
   }
 }
 </script>
@@ -104,7 +135,7 @@ export default{
 div.head{
   padding:20px 20px 60px 30px;
   width: 100%;
-  height: 280px;
+  height: auto;
 }
 
 .cover-image{
@@ -149,14 +180,16 @@ div.head{
 span.play-count,
 span.track-count{
   float: right;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: normal;
   height: 20px;
   line-height: 20px;
-  width: 35px;
+  width: 40px;
   text-align: right; 
-  margin-left: 20px;
+  margin-left: 5px;
   position: relative;
+  text-align: left;
+  text-indent: 5px;
 }
 
 span.play-count::before,
@@ -205,6 +238,7 @@ span.track-count::before{
 
 .control{
   overflow: hidden;
+
 }
 
 .control  > div{
@@ -214,6 +248,48 @@ span.track-count::before{
   padding: 2px 10px;
   padding-left: 25px;
   font-size: 14px;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+.control > div:hover{
+  background-color: rgb(245, 245, 247);
+}
+
+.control > div::before{
+  content: ' ';
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 15px;
+  height: 15px;
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+}
+
+.add{
+  border-left: 1px solid rgb(225,225,226);
+  margin-left: 5px;
+  text-align: center;
+  font-size: 15px;
+  padding-left: 5px;
+}
+
+.play-all::before{
+  background-image: url('../../assets/play2.png');
+}
+
+.saved::before{
+  background-image: url('../../assets/collect.png');
+}
+
+.share-count::before{
+  background-image: url('../../assets/share.png');
+}
+
+.download-all::before{
+  background-image: url('../../assets/download.png');
 }
 
 .play-all div {
@@ -239,6 +315,10 @@ span.track-count::before{
   height: 40px;
 }
 
+.spread{
+  height: auto !important;
+}
+
 .drop-down{
   float: right;
   font-size: 20px;
@@ -262,6 +342,10 @@ dd:not(.search){
   height: 30px;
   line-height: 30px;
   cursor: pointer;
+}
+
+dd:not(.search):not(.choosed):hover{
+  background-color: rgb(245, 245, 247);
 }
 
 .choosed{

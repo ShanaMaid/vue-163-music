@@ -7,7 +7,7 @@
         <router-link to="/search/ablum"><dd :class="{choosed: topName =='ablum'}">专辑</dd></router-link>
         <router-link to="/search/mv"><dd :class="{choosed: topName =='mv'}">MV</dd></router-link>
         <router-link to="/search/songlist"><dd :class="{choosed: topName =='songlist'}">歌单</dd></router-link>
-        <router-link to="/search/word"><dd :class="{choosed: topName =='word'}">歌词</dd></router-link>
+        <!-- <router-link to="/search/word"><dd :class="{choosed: topName =='word'}">歌词</dd></router-link> -->
         <router-link to="/search/station"><dd :class="{choosed: topName =='station'}">主播电台</dd></router-link>
         <router-link to="/search/user"><dd :class="{choosed: topName =='user'}">用户</dd></router-link>
       </dl>

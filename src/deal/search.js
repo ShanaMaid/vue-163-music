@@ -81,6 +81,7 @@ export default{
     }
     for (let item of data.result.playlists) {
       let {
+        id,
         name,
         trackCount: count,
         coverImgUrl: src,
@@ -89,7 +90,7 @@ export default{
         }
       } = item
       src += '?param=40y40'
-      list.push({src, name, count, nickname})
+      list.push({id, src, name, count, nickname})
     }
     return {list, count}
   },
@@ -112,24 +113,26 @@ export default{
     return {list, count}
   },
   station: (data) => {
-    console.log(data)
     let station = []
     let list = []
     if (objectIsNull(data.result)) {
       return {list, count: 0}
     }
     let count = data.result.djprogramCount
-    for (let item of data.result.djRadios) {
-      let {
-        picUrl: src,
-        name,
-        dj: {
-          nickname
-        }
-      } = item
-      station.push({src, nickname, name})
+    if (!objectIsNull(data.result.djRadios)) {
+      for (let item of data.result.djRadios) {
+        let {
+          picUrl: src,
+          name,
+          dj: {
+            nickname
+          }
+        } = item
+        station.push({src, nickname, name})
+      }
     }
     for (let item of data.result.djprograms) {
+      let singer = '佚名'
       let {
         coverUrl: src,
         name,
@@ -137,7 +140,7 @@ export default{
         mainSong: {
           mp3Url,
           id,
-          artists: [{name: singer}]
+          artists
         },
         duration,
         dj: {
@@ -145,6 +148,9 @@ export default{
         },
         serialNum
       } = item
+      if (artists.length > 0) {
+        singer = artists[0].name
+      }
       src += '?param=40y40'
       list.push({src, name, listenerCount, mp3Url, id, duration, brand, singer, serialNum})
     }
@@ -157,14 +163,17 @@ export default{
     }
     let count = data.result.mvCount
     for (let item of data.result.mvs) {
+      let nickname = '佚名'
       let {
         id,
         name,
         cover: src,
-        artists: [{name: nickname}],
         playCount,
         duration
       } = item
+      if (item.artists.length > 0) {
+        nickname = item.artists[0].name
+      }
       src += '?param=140y140'
       list.push({id, src, name, nickname, playCount, duration})
     }

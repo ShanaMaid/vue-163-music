@@ -6,18 +6,6 @@ import Rank from 'components/find/rank'
 import New from 'components/find/new'
 import Singer from 'components/find/singer'
 
-// export default{
-//   Recommend,
-//   Song,
-//   Nav,
-//   Station,
-//   Rank,
-//   New,
-//   Singer,
-//   children:[
-//   ]
-// }
-
 export default{
   path: '/find',
   component: Nav,

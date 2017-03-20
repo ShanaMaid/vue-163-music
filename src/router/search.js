@@ -1,12 +1,12 @@
-import Home from './home'
-import Single from './single'
-import Ablum from './ablum'
-import Mv from './mv'
-import Singer from './singer'
-import SongList from './song-list'
-import Station from './station'
-import User from './user'
-import Word from './word'
+import Home from 'components/search/home'
+import Single from 'components/search/single'
+import Ablum from 'components/search/ablum'
+import Mv from 'components/search/mv'
+import Singer from 'components/search/singer'
+import SongList from 'components/search/song-list'
+import Station from 'components/search/station'
+import User from 'components/search/user'
+import Word from 'components/search/word'
 
 export default{
   path: '/search',

@@ -14,7 +14,7 @@
         <span class="collect">收藏全部</span>
       </div>
       <ul class="song-list">
-        <li v-for="(val, index) in list" @dblclick="$store.commit('changeSong',index)" :class="{playing:current === index}" >
+        <li v-for="(val, index) in list" @click="$store.commit('changeSong',index)" :class="{playing:current === index}" >
           <span style="width:62.5%">{{val.name}}</span>
           <span style="width:25%" class="singer">{{val.singer}}</span>
           <span style="">{{val.duration | durationToTime}}</span>

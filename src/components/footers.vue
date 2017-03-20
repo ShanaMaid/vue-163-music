@@ -27,6 +27,8 @@
 <script >
 import VueSlider from 'vue-slider-component'
 import PlayList from './play-list'
+import Vue from 'vue'
+
 export default {
   name: 'footers',
   components: {
@@ -74,13 +76,13 @@ export default {
   methods: {
     audioInit: function () {
       const duration = this.$refs.player.duration
-      this.end = this.timeToStr(duration)
+      this.end = Vue.options.filters.timeToStr(duration)
       this.setting.max = Number.parseInt(duration, 10)
       this.playMusic()
     },
     getCurrent: function () {
       const currentTime = this.$refs.player.currentTime
-      this.current = this.timeToStr(currentTime)
+      this.current = Vue.options.filters.timeToStr(currentTime)
       this.progress = Number.parseInt(currentTime, 10)
     },
     playMusic: function () {
@@ -100,13 +102,6 @@ export default {
       clearInterval(this.update)
       this.play = false
       this.progress = 0
-    },
-    timeToStr: function (time) {
-      let min = Number.parseInt(time / 60, 10) + ''
-      let seconds = Number.parseInt(time % 60, 10) + ''
-      min = min.length === 1 ? ('0' + min) : min
-      seconds = seconds.length === 1 ? ('0' + seconds) : seconds
-      return min + ':' + seconds
     },
     errorLoad: function () {
       if (this.mp3Url === 'error') {
@@ -141,7 +136,7 @@ export default {
   watch: {
     progress: function (newValue, oldValue) {
       if (Math.abs(newValue - oldValue) > 1) {
-        this.current = this.timeToStr(newValue)
+        this.current = Vue.options.filters.timeToStr(newValue)
         this.$refs.player.currentTime = newValue
       }
     },

@@ -1,4 +1,4 @@
-import Home from './home'
+import Home from 'components/download/home'
 
 export default{
   path: '/download',

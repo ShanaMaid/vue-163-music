@@ -1,6 +1,6 @@
 <template>
     <div>
-      {{$route.name}}1
+      {{$route.path}}
     </div>
 </template> 
 <script>

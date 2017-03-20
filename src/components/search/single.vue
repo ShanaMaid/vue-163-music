@@ -13,7 +13,7 @@
                 <div style="width:16.25%">热度</div>
             </li>
             <template v-for="(value, key) in list">
-              <li class="item" @dblclick="$store.commit('addSong', value)">
+              <li class="item" @click="$store.commit('addSong', value)">
                   <div style="width:6.25%">{{key + 1}}</div>
                   <div style="width:6.25%">&nbsp</div>
                   <div style="width:27.5%">{{value.name}}</div>

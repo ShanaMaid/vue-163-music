@@ -1,17 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Find from 'components/find/'
-import Personal from 'components/personal/'
-import Cloud from 'components/cloud/'
-import Download from 'components/download/'
-import Friend from 'components/friend/'
-import Local from 'components/local/'
-import Mv from 'components/mv/'
-import Singer from 'components/singer/'
-import Station from 'components/station/'
-import Search from 'components/search/index.js'
-import PlayList from 'components/playlist'
+import Find from './find'
+import Personal from './personal'
+import Cloud from './cloud'
+import Download from './download'
+import Friend from './friend'
+import Local from './local'
+import Mv from './mv'
+import Singer from './singer'
+import Station from './station'
+import Search from './search'
+import PlayList from './playlist'
 
 Vue.use(Router)
 
