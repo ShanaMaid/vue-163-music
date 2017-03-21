@@ -17,7 +17,7 @@
 
 [更多效果gif图](screenshot/)
 
-## 依赖
+## 工具&技能
 `vue` + `vuex`+ `vue-router` + `vue-resource`
 
 `express`
@@ -29,6 +29,8 @@
 `animate.css` css动画库
 
 `vue-slider-component` 滑块组件
+
+`postman` 接口测试工具
 
 
 ## 实现功能
