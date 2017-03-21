@@ -7,7 +7,7 @@
 
 页面高度为`670px`，`1366 X 768`分辨率及其以下按F11全屏浏览效果更佳
 
-欢迎`issue`，`pr`，`star` or `follow`！我将继续开源更多适合练手学习的有趣项目
+欢迎`issue`，`pr`，`star` or `follow`！我将继续开源更多有趣的项目
 
 ## 在线版
 [点击进入](http://www.shanamaid.top:3000/)
@@ -22,9 +22,9 @@
 
 `express`
 
-`http-proxy-middleware` http请求转发
+`http-proxy-middleware` 一个http代理的中间件，进行http请求转发，实现跨域请求
 
-`store.js` 本地缓存播放列表
+`store.js` 一个非常棒的处理`localStorage`的轮子，原生`localStorage`只支持存储字符串类型，轮子进行封装后可以直接存储`Array`、`Object`、`function`、`Set`等类型
 
 `animate.css` css动画库
 
@@ -32,6 +32,26 @@
 
 `postman` 接口测试工具
 
+## 使用
+```
+git clone https://github.com/ShanaMaid/vue-163-music.git
+
+cd vue-163-music
+
+npm install 
+
+# 开发环境
+npm run dev
+访问 http://localhost:8080/
+
+# 打包
+npm run build
+
+# 实际环境
+cd server
+node app.js
+访问 http://localhost:3000/
+```
 
 ## 实现功能
 ### 发现音乐
@@ -67,21 +87,6 @@
 ## 一些问题
 通过api接口获取的mv播放量基本不准，尚未找到原因，其余类型的播放量准确
 
-
-## 使用
-```
-git clone https://github.com/ShanaMaid/vue-163-music.git
-
-cd vue-163-music
-
-npm install 
-
-cd server
-
-node app.js
-
-访问 http://localhost:3000/
-```
 ## 目录结构
 ```
 |
@@ -106,9 +111,75 @@ node app.js
 
 ```
 
-## 路由配置
-详情见`src/router/index.js`
+## 一些注意事项
+项目中使用了网易爸爸的接口，需要使用`http-proxy-middleware`进行转发，开发环境下需要在`config/index.js`中的`dev`中添加下列配置即可
+```
+proxyTable: {
+  '/api': {
+      target: 'http://music.163.com',
+      changeOrigin: true,
+      headers: {
+          Referer: 'http://music.163.com/'
+      }
+  }
+}
+```
 
+实际环境中，服务器端配置
+```
+var express = require('express');
+var proxy = require('http-proxy-middleware');
 
+var app = express();
+app.use('/static', express.static('static'));
+app.use('/api', proxy({
+  target: 'http://music.163.com', 
+  changeOrigin: true, 
+  headers: {
+    Referer: 'http://music.163.com/'
+  }
+}
+));
 
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
+app.listen(3000);
+```
+
+对返回的数据解构`js`文件位于`src/components/deal/`目录下，比如对单曲搜索结果进行结构
+```
+single: (data) => {
+  let list = []
+  let count = data.result.songCount
+  if (count === 0) {
+    return {list, count}
+  }
+  for (let item of data.result.songs) {
+    let singer = ''
+    let {
+      name,
+      mp3Url,
+      duration,
+      id,
+      album: {
+        name: albumName
+      }
+    } = item
+    for (let item of item.artists) {
+      singer += item.name + ' '
+    }
+    list.push({name, mp3Url, duration, id, albumName, singer})
+  }
+  return {list, count}
+}
+```
+
+`vuex`状态管理位于`src/components/store`目录下
+
+`vue-router`路由配置管理位于`src/components/router`目录下
+
+自定义过滤器位于`src/components/filters/`目录下
+
+网易云音乐接口来源于[http://moonlib.com/606.html](http://moonlib.com/606.html)
 
