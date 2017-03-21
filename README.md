@@ -7,24 +7,28 @@
 
 页面高度为`670px`，`1366 X 768`分辨率及其以下按F11全屏浏览效果更佳
 
+欢迎`issue`，`pr`，`star` or `follow`！我将继续开源更多适合练手学习的有趣项目
+
 ## 在线版
 [点击进入](http://www.shanamaid.top:3000/)
 
 ## 部分效果截图
-![1](screenshot/1.gif)
-
-![2](screenshot/2.gif)
-
 ![3](screenshot/3.gif)
 
 [更多效果gif图](screenshot/)
 
-## 技术栈
+## 依赖
 `vue` + `vuex`+ `vue-router` + `vue-resource`
 
 `express`
 
 `http-proxy-middleware` http请求转发
+
+`store.js` 本地缓存播放列表
+
+`animate.css` css动画库
+
+`vue-slider-component` 滑块组件
 
 
 ## 实现功能
@@ -53,8 +57,10 @@
 - [x] 播放全部
 
 ### 播放列表
-- [x] 切歌(单击或双击切歌)
+- [x] 切歌(单击切歌)
+- [x] 删歌(鼠标悬浮在要删除的歌曲上，点击右侧小X)
 - [x] 清空播放列表
+- [x] 本地缓存播放列表
 
 ## 一些问题
 通过api接口获取的mv播放量基本不准，尚未找到原因，其余类型的播放量准确
@@ -98,51 +104,9 @@ node app.js
 
 ```
 
-
-## 模块
-### 发现音乐
-- [x] 个性推荐
-- [ ] 歌单
-- [ ] 主播电台
-- [ ] 排行榜
-- [ ] 歌手
-- [ ] 最新音乐
-
-
-- [ ] 私人FM
-- [ ] MV
-- [ ] 朋友
-- [ ] 本地音乐
-- [ ] 下载管理
-- [ ] 我的音乐云盘
-- [x] 我的歌手
-- [x] 我的电台
-- [x] 歌单
-
-搜索音乐
-- [x] 单曲
-- [x] 歌手
-- [x] 专辑
-- [x] MV
-- [x] 歌单
-- [ ] 歌词
-- [x] 主播电台
-- [x] 用户
-
-- [x] 播放音乐
 ## 路由配置
 详情见`src/router/index.js`
 
 
-## 指令
-```
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
 

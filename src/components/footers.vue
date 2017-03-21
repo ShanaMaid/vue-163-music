@@ -19,7 +19,7 @@
         style="display:none" :src="mp3Url"  controls="controls"></audio>
     </div>
     <div class="playlist" tabindex="10" @click.capture="listShow = true" @focus="listShow = true" @blur="listShow = false">{{list.length}}
-      <play-list class="list" @set-show="setShow" :list="list" v-show="listShow" :current="currentSong" @clear-list="clearList"/>
+      <play-list class="list" @set-show="setShow" :list="list" v-show="listShow" :current="currentSong"/>
     </div>
     
 	</div>
@@ -112,9 +112,6 @@ export default {
     },
     setShow: function (show) {
       this.listShow = show
-    },
-    clearList: function () {
-      this.$store.commit('removeSong', 'all')
     }
   },
   computed: {
@@ -130,6 +127,7 @@ export default {
       return this.$store.state.search.songList
     },
     currentSong: function () {
+      console.log(this.$store.state.search.currentSong)
       return this.$store.state.search.currentSong
     }
   },

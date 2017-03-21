@@ -10,14 +10,15 @@
       </div>
       <div class="title">
         <span class="sum">总{{list.length}}首</span>
-        <span class="clear" @click="clearList">清空</span>
+        <span class="clear" @click="$store.commit('removeSong', 'all')">清空</span>
         <span class="collect">收藏全部</span>
       </div>
       <ul class="song-list">
-        <li v-for="(val, index) in list" @click="$store.commit('changeSong',index)" :class="{playing:current === index}" >
+        <li v-for="(val, index) in list" @click="$store.commit('changeSong',index)"  :class="{playing:current == index}" >
           <span style="width:62.5%">{{val.name}}</span>
           <span style="width:25%" class="singer">{{val.singer}}</span>
           <span style="">{{val.duration | durationToTime}}</span>
+          <span class="delete" @click.stop="$store.commit('removeSong', index)">×</span>
         </li>
       </ul>
     </div>
@@ -32,9 +33,6 @@ export default{
   methods: {
     setShow: function () {
       this.$emit('set-show', false)
-    },
-    clearList: function () {
-      this.$emit('clear-list', 'all')
     }
   },
   props: ['list', 'current']
@@ -123,6 +121,10 @@ li:hover span{
   color: black;
 }
 
+li:hover .delete{
+  display: inline-block;
+}
+
 li span{
   display: inline-block;
   overflow: hidden;
@@ -154,6 +156,12 @@ li span{
   left: 10px;
 }
 
+.delete{
+  float: right;
+  padding: 0px 5px;
+  cursor: pointer;
+  display: none;
+}
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 ::-webkit-scrollbar {
