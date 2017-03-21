@@ -147,7 +147,7 @@ app.get('/', function (req, res) {
 app.listen(3000);
 ```
 
-对返回的数据解构`js`文件位于`src/components/deal/`目录下，比如对单曲搜索结果进行结构
+对返回的数据解构`js`文件位于`src/components/deal/`目录下，比如对单曲搜索结果进行解构
 ```
 single: (data) => {
   let list = []
