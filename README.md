@@ -9,6 +9,8 @@
 
 欢迎`issue`，`pr`，`star` or `follow`！我将继续开源更多有趣的项目
 
+推荐一个React全家桶写的 [追书神器](https://github.com/ShanaMaid/oho-reader)
+
 ## 在线版
 [点击进入](http://www.shanamaid.top:3000/)
 
