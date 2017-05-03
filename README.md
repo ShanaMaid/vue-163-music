@@ -12,7 +12,7 @@
 推荐一个React全家桶写的 [追书神器](https://github.com/ShanaMaid/oho-reader)
 
 ## 在线版
-[点击进入](http://163music.shanamaid.top/)
+[点击进入](http://163music.shanalab.top/)
 
 ## 部分效果截图
 ![3](screenshot/3.gif)
