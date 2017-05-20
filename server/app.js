@@ -12,6 +12,13 @@ app.use('/api', proxy({
 }
 ));
 
+app.use('/newapi', proxy({
+  target: 'http://localhost:3006/', 
+  changeOrigin: true, 
+  pathRewrite: {'^/newapi' : '/'}
+}
+));
+
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });

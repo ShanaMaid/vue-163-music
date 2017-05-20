@@ -86,9 +86,12 @@ export default{
         vm.filterList = result.list
       })
     })
+
+    Vue.http.get('/newapi/music/url?id=347230').then(response => {
+      console.log(response.body)
+    })
   },
   beforeRouteUpdate (to, from, next) {
-    console.log(111)
     this.$http.post('/api/playlist/detail', {id: to.params.id}).then(response => {
       const result = playlist.getList(response.body)
       if (!result) {
@@ -107,7 +110,6 @@ export default{
           this.$router.push({path: '/'})
         }
         this.list = result
-        console.log(this.list)
         this.filterList = result.list
       })
     }

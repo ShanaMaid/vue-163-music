@@ -10,8 +10,11 @@ export default{
     type: 'single'
   },
   mutations: {
+    updateSongList (state, list) {
+      state.songList = list
+      storejs.set('songList', state.songList)
+    },
     addSong (state, obj) {
-      console.log(state.songId)
       if (state.songId.has(obj.id)) {
         for (let item in state.songList) {
           if (state.songList[item].id === obj.id) {

@@ -34,6 +34,11 @@ module.exports = {
             headers: {
                 Referer: 'http://music.163.com/'
             }
+        },
+        '/newapi': {
+            target: 'http://localhost:3006/',
+            changeOrigin: true,
+            pathRewrite: {'^/newapi' : '/'},
         }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

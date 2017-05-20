@@ -1,5 +1,6 @@
 export default{
   getList: function (data) {
+    console.log(data)
     if (data.code !== 200) {
       return false
     }

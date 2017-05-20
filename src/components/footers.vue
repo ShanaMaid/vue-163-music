@@ -121,13 +121,18 @@ export default {
         this.ended()
         return 'error'
       }
+      if (list[this.currentSong].mp3Url === null) {
+        Vue.http.get(`/newapi/music/url?id=${list[this.currentSong].id}`).then(response => {
+          list[this.currentSong].mp3Url = response.body.data[0].url
+          this.$store.commit('updateSongList', list)
+        })
+      }
       return list[this.currentSong].mp3Url
     },
     list: function () {
       return this.$store.state.search.songList
     },
     currentSong: function () {
-      console.log(this.$store.state.search.currentSong)
       return this.$store.state.search.currentSong
     }
   },
