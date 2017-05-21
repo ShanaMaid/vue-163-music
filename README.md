@@ -42,6 +42,10 @@ cd vue-163-music
 
 npm install 
 
+# 启动api转发
+node server/newapi.js
+
+
 # 开发环境
 npm run dev
 访问 http://localhost:8080/
