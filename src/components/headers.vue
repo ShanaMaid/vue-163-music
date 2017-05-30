@@ -48,8 +48,9 @@ export default {
 .logo{
 	width: 190px;
 }
-
-
+dl {
+	overflow: auto;
+}
 dl dd{
 	float: left;
 	height: 50px;
