@@ -16,23 +16,23 @@ export default{
       component: Recommend
     },
     {
-      path: 'song',
+      path: 'song', // 歌单
       component: Song
     },
     {
-      path: 'station',
+      path: 'station',  // 主播电台
       component: Station
     },
     {
-      path: 'singer',
+      path: 'singer', // 歌手
       component: Singer
     },
     {
-      path: 'new',
+      path: 'new',  // 最新音乐
       component: New
     },
     {
-      path: 'rank',
+      path: 'rank', // 排行榜
       component: Rank
     }
   ]

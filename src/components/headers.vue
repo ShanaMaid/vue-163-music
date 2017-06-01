@@ -16,10 +16,7 @@
 			<dd class="person">
 				<person-msg></person-msg>
 			</dd>
-			<dd></dd>
-			<dd></dd>
 		</dl>
-			
 	</div>
 </template>
 <script >
@@ -32,9 +29,9 @@ export default {
     PersonMsg
   },
   data () {
-    return {
-      app: '网易云音乐'
-    }
+    // return {
+    //   app: '网易云音乐'
+    // }
   }
 }
 </script>
@@ -48,7 +45,6 @@ export default {
 .logo{
 	width: 190px;
 }
-
 
 dl dd{
 	float: left;

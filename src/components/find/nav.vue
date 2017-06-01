@@ -20,7 +20,6 @@ export default{
     topName: function () {
       let path = this.$route.path
       path = path.substr(path.lastIndexOf('/') + 1)
-      console.log(path)
       return path
     }
   }
