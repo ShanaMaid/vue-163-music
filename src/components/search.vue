@@ -102,7 +102,7 @@ export default{
 	padding: 0 30px 0 10px;
 	box-sizing: border-box;
 	color: white;
-	background-color: rgb(168,40,40);
+
 }
 
 .search span > i{
